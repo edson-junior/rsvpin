@@ -2,8 +2,8 @@
   {
     "path": "/*",
     "resourceSizes": [
-      { "resourceType": "document", "budget": 18 },
-      { "resourceType": "total", "budget": 200 }
+      { "resourceType": "document", "budget": 200 },
+      { "resourceType": "total", "budget": 500 }
     ]
   }
 ]
