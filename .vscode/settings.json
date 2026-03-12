@@ -1,9 +1,21 @@
 {
-  "editor.defaultFormatter": "biomejs.biome",
-  "editor.formatOnSave": true,
-  "biome.enabled": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
-  }
+	// Ignore unknown CSS at rules for Tailwind CSS
+	"css.lint.unknownAtRules": "ignore",
+	// Enable Stylelint in SCSS, PostCSS, Tailwind CSS and JS/TS
+	// (for CSS-in-JS)
+	"stylelint.validate": [
+		"css",
+		"scss",
+		"postcss",
+		"tailwindcss",
+		"javascript",
+		"typescriptreact"
+	],
+	"files.associations": { "globals.css": "tailwindcss" },
+	// Enable Next.js TypeScript plugin
+	// https://nextjs.org/docs/app/building-your-application/configuring/typescript#typescript-plugin
+	"js/ts.tsdk.path": "node_modules/typescript/lib",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"eslint.enable": true
 }
