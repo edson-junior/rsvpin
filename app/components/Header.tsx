@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Logo } from './ui/logo';
 import { useState } from 'react';
-import { LuCompass, LuMenu, LuPlus, LuUser, LuX } from 'react-icons/lu';
+import { LuMenu, LuUser, LuX } from 'react-icons/lu';
 import { Button } from './ui/button';
 
 function Header() {

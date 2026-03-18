@@ -1,4 +1,9 @@
-export function Logo() {
+import type { SVGProps } from 'react';
+import type { JSX } from 'react/jsx-runtime';
+
+type Props = JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>;
+
+export function Logo(props: Props) {
   return (
     <svg
       width="140"
@@ -6,6 +11,7 @@ export function Logo() {
       viewBox="0 0 140 37"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         d="M11 6C6.0294 6 2 10.0294 2 15C2 16.8559 2.60034 18.5696 3.62403 19.9606L11 31L18.376 19.9606C19.3997 18.5696 20 16.8559 20 15C20 10.0294 15.9706 6 11 6Z"
