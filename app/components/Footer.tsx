@@ -5,7 +5,7 @@ import { LuInstagram, LuLinkedin, LuTwitter } from 'react-icons/lu';
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-card">
-      <div className="container mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Brand */}
         <div className="flex flex-col items-center gap-2">
           <Logo className="flex w-28" />
