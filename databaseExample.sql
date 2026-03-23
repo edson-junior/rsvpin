@@ -1,17 +1,11 @@
 -- CREATE DATABASE next_js_example_winter_2026_eu;
-
 -- CREATE USER next_js_example_winter_2026_eu
 -- WITH
 --   encrypted password 'next_js_example_winter_2026_eu';
-
 -- GRANT ALL privileges ON database next_js_example_winter_2026_eu TO next_js_example_winter_2026_eu;
-
 -- -- \connect next_js_example_winter_2026_eu
 -- CREATE SCHEMA next_js_example_winter_2026_eu AUTHORIZATION next_js_example_winter_2026_eu;
-
-
 -- CREATE TYPE location_options AS ENUM ('offline', 'online');
-
 CREATE DATABASE rsvpin_2026;
 
 CREATE USER rsvpin_2026
@@ -23,35 +17,34 @@ GRANT ALL privileges ON database rsvpin TO rsvpin_2026;
 -- \connect rsvpin_2026
 CREATE SCHEMA public AUTHORIZATION rsvpin_2026;
 
-GRANT ALL PRIVILEGES ON SCHEMA public TO rsvpin_2026;
+GRANT ALL privileges ON schema public TO rsvpin_2026;
 
 CREATE TABLE users (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  username VARCHAR(255) NOT NULL,
-  avatar_url VARCHAR(255),
-  bio TEXT,
-  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  username varchar(255) NOT NULL,
+  avatar_url varchar(255),
+  bio text,
+  created_at timestamp NOT NULL DEFAULT now()
 );
 
 CREATE TABLE events (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL,
-  date DATE NOT NULL,
-  location VARCHAR(255) NOT NULL,
-  category VARCHAR(255) NOT NULL,
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name varchar(255) NOT NULL,
+  description text NOT NULL,
+  date date NOT NULL,
+  location varchar(255) NOT NULL,
+  category varchar(255) NOT NULL,
   location_type location_options NOT NULL DEFAULT 'offline',
-  url VARCHAR(255),
-  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-  starts_at DATE NOT NULL,
-  ends_at DATE NOT NULL,
+  url varchar(255),
+  created_at timestamp NOT NULL DEFAULT now(),
+  starts_at date NOT NULL,
+  ends_at date NOT NULL,
   hosts jsonb,
   guests jsonb
 );
-
 
 INSERT INTO
   events (
