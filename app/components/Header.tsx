@@ -23,7 +23,7 @@ function Header() {
 
         <div className="hidden md:flex items-center gap-3">
           <Button asChild>
-            <Link href="/signup">
+            <Link href="/signin">
               <LuUser /> Sign in
             </Link>
           </Button>
@@ -61,7 +61,7 @@ function Header() {
             </Link>
 
             <Link
-              href="/signup"
+              href="/signin"
               onClick={() => setMobileOpen(false)}
               className="px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground text-center"
             >
