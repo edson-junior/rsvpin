@@ -26,6 +26,7 @@ export interface Event {
   created_at: string;
   starts_at: string;
   ends_at: string;
+  maxAttendees: number;
   hosts: EventGuest[];
   guests: EventGuest[];
 }
@@ -59,14 +60,15 @@ export const mockEvents: Event[] = [
     name: 'Spring Community Meetup',
     description:
       'A casual meetup for local developers to share projects, network, and enjoy snacks.',
-    date: '2026-04-20',
+    date: '2026-04-20T00:00:00',
     location: 'Downtown Innovation Hub',
     category: 'Networking',
     location_type: 'offline',
     url: 'https://example.com/events/spring-meetup',
     created_at: '2026-03-10T09:15:00Z',
-    starts_at: '2026-04-20',
-    ends_at: '2026-04-20',
+    starts_at: '2026-04-20T13:00:00Z',
+    ends_at: '2026-04-20T17:00:00Z',
+    maxAttendees: 50,
     hosts: [
       {
         id: '8b7a4f2e-1d3a-4b9f-9c44-2e7f0c4d9e5a',
@@ -85,14 +87,15 @@ export const mockEvents: Event[] = [
     name: 'Remote Design Workshop',
     description:
       'A hands-on workshop for remote teams to level up their product design collaboration.',
-    date: '2026-05-05',
+    date: '2026-05-05T00:00:00',
     location: 'Zoom',
     category: 'Workshop',
     location_type: 'online',
     url: 'https://example.com/events/remote-design',
     created_at: '2026-03-12T14:00:00Z',
-    starts_at: '2026-05-05',
-    ends_at: '2026-05-05',
+    starts_at: '2026-05-05T13:00:00Z',
+    ends_at: '2026-05-05T17:00:00Z',
+    maxAttendees: 50,
     hosts: [
       {
         id: '8b7a4f2e-1d3a-4b9f-9c44-2e7f0c4d9e5a',
