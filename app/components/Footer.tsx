@@ -20,13 +20,13 @@ const Footer = () => {
         <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-4">
             <Link
-              href="/discover"
+              href="/events"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Discover
             </Link>
             <Link
-              href="/create"
+              href="/events/create"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Create event

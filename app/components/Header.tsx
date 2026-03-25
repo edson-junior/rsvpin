@@ -17,8 +17,8 @@ function Header() {
         </Link>
 
         <div className="hidden md:flex items-center gap-4">
-          <Link href="/discover">Explore Events</Link>
-          <Link href="/create">Create Event</Link>
+          <Link href="/events">Explore Events</Link>
+          <Link href="/events/create">Create Event</Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -46,14 +46,14 @@ function Header() {
         <div className="md:hidden border-t border-border bg-card">
           <nav className="p-4 flex flex-col gap-2">
             <Link
-              href="/discover"
+              href="/events"
               className="px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               Discover
             </Link>
             <Link
-              href="/create"
+              href="/events/create"
               className="px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors"
               onClick={() => setMobileOpen(false)}
             >

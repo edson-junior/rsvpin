@@ -29,13 +29,13 @@ export default async function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="group" asChild>
-              <Link href="/create">
+              <Link href="/events/create">
                 <span>Create your first Event</span>
                 <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link href="/discover">Explore Events</Link>
+              <Link href="/events">Explore Events</Link>
             </Button>
           </div>
         </div>

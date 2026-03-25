@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { inputClass, labelClass } from '../components/ui/input';
-import { Button } from '../components/ui/button';
+import { inputClass, labelClass } from '../../components/ui/input';
+import { Button } from '../../components/ui/button';
 import { LuArrowRight } from 'react-icons/lu';
 
 export default async function SignIn() {
