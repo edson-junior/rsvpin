@@ -4,7 +4,7 @@
 import 'server-only';
 import postgres, { type Sql } from 'postgres';
 import postgresJsConfig from '../ley.config.js';
-import { setEnvironmentVariables } from '../lib/config.js';
+import { setEnvironmentVariables } from '../lib/config';
 
 // Adds all environment variables inside
 // .env file to `process.env`
