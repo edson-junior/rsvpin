@@ -14,6 +14,9 @@ importers:
       '@radix-ui/react-tabs':
         specifier: ^1.1.13
         version: 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@upleveled/ley':
+        specifier: ^1.0.0
+        version: 1.0.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -78,9 +81,6 @@ importers:
       husky:
         specifier: ^9.1.7
         version: 9.1.7
-      ley:
-        specifier: ^0.8.1
-        version: 0.8.1
       libpg-query:
         specifier: ^17.7.3
         version: 17.7.3
@@ -1493,6 +1493,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@upleveled/ley@1.0.0':
+    resolution: {integrity: sha512-Fy4OejElK4wjmP4jQFUW6DmNuVCGZnwlafpPBYlaByqnEOfX5ickyELdv4MUtUQZdGQrMqsxSHB3/slj5T2UfA==}
+    engines: {node: '>= 22.18.0'}
+    hasBin: true
+
   '@vitest/expect@4.0.18':
     resolution: {integrity: sha512-8sCWUyckXXYvx4opfzVY03EOiYVxyNrHS5QxX3DAIi5dpJAAkyJezHCP77VMX4HKA2LDT/Jpfo8i2r5BE3GnQQ==}
 
@@ -2673,11 +2678,6 @@ packages:
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
-
-  ley@0.8.1:
-    resolution: {integrity: sha512-8Nd5uzie4PxiEJcQNv5YL1IQCMzye/0sE8VPB4KczJkyd44NfDyK/7Vbmp9eHYt+dJ4hxaXy+gF4DORSxYGArg==}
-    engines: {node: '>= 8'}
-    hasBin: true
 
   libpg-query@17.7.3:
     resolution: {integrity: sha512-lHKBvoWRsXt/9bJxpAeFxkLu0CA6tELusqy3o1z6/DwGXSETxhKJDaNlNdrNV8msvXDLBhpg/4RE/fKKs5rYFA==}
@@ -4955,6 +4955,13 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
+  '@upleveled/ley@1.0.0':
+    dependencies:
+      kleur: 4.1.5
+      mk-dirs: 3.0.0
+      sade: 1.8.1
+      totalist: 2.0.0
+
   '@vitest/expect@4.0.18':
     dependencies:
       '@standard-schema/spec': 1.1.0
@@ -6272,13 +6279,6 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
-
-  ley@0.8.1:
-    dependencies:
-      kleur: 4.1.5
-      mk-dirs: 3.0.0
-      sade: 1.8.1
-      totalist: 2.0.0
 
   libpg-query@17.7.3:
     dependencies:
