@@ -1,14 +1,9 @@
-import { getAllEventsInsecure } from '@/database/events';
-import type { Event } from '@/mocks/mockData';
+import { getAllEventsInsecure, type Event } from '@/database/events';
 import { NextResponse } from 'next/server';
 
-export type EventsResponse = {
-  events: Event[];
-};
-
 // GET (Read in CRUD)
-export async function GET(): Promise<NextResponse<EventsResponse>> {
+export async function GET(): Promise<NextResponse<Event[]>> {
   const events = await getAllEventsInsecure();
 
-  return NextResponse.json({ events });
+  return NextResponse.json(events);
 }

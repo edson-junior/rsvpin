@@ -6,14 +6,14 @@ import Image from 'next/image';
 export function EventCard({
   id,
   name,
-  starts_at,
+  startsAt,
   location,
-  location_type,
-  guest_count,
+  locationType,
+  guestCount,
   image,
   category,
 }: Event) {
-  const formattedDate = new Date(starts_at).toLocaleDateString(
+  const formattedDate = new Date(startsAt).toLocaleDateString(
     process.env.LOCALE,
     {
       weekday: 'long',
@@ -52,7 +52,7 @@ export function EventCard({
         </div>
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <LuMapPin className="w-4 h-4" />
-          {location_type === 'offline' ? (
+          {locationType === 'offline' ? (
             <span>{location}</span>
           ) : (
             <span>Online</span>
@@ -60,7 +60,7 @@ export function EventCard({
         </div>
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <LuUsers className="w-4 h-4" />
-          <span>{guest_count} attending</span>
+          <span>{guestCount} attending</span>
         </div>
       </div>
     </Link>

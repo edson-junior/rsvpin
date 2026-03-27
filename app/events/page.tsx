@@ -1,7 +1,16 @@
-import { mockEvents } from '@/mocks/mockData';
+import { type Event } from '@/database/events';
 import { EventCard } from '../components/EventCard';
 
 export default async function Discover() {
+  const data = await fetch('http://localhost:3000/api/events');
+
+  if (!data.ok) {
+    console.error(data.statusText);
+    return <p>Error while fetching data</p>;
+  }
+
+  const events: Event[] = await data.json();
+
   return (
     <main className="container mx-auto px-4 pt-32 md:pt-40 pb-20 max-w-7xl">
       <div className="max-w-7xl mx-auto">
@@ -21,8 +30,8 @@ export default async function Discover() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {mockEvents.map((event, index) => (
-            <EventCard key={index} {...event} />
+          {events.map((event) => (
+            <EventCard key={event.id} {...event} />
           ))}
         </div>
       </div>
