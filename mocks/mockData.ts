@@ -32,7 +32,7 @@ export interface Event {
   created_at: string;
   starts_at: string;
   ends_at: string;
-  maxAttendees: number;
+  maxGuests: number;
   hosts: EventGuest[];
   guests: EventGuest[];
 }
@@ -84,7 +84,7 @@ export const mockEvents: Event[] = [
     created_at: '2026-03-10T09:15:00Z',
     starts_at: '2026-04-20T13:00:00Z',
     ends_at: '2026-04-20T17:00:00Z',
-    maxAttendees: 50,
+    maxGuests: 50,
     hosts: [
       {
         id: '8b7a4f2e-1d3a-4b9f-9c44-2e7f0c4d9e5a',
@@ -115,7 +115,7 @@ export const mockEvents: Event[] = [
     created_at: '2026-03-12T14:00:00Z',
     starts_at: '2026-05-05T13:00:00Z',
     ends_at: '2026-05-05T17:00:00Z',
-    maxAttendees: 50,
+    maxGuests: 50,
     hosts: [
       {
         id: '8b7a4f2e-1d3a-4b9f-9c44-2e7f0c4d9e5a',

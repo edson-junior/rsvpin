@@ -37,8 +37,8 @@ export default async function NotePage(props: PageProps<'/events/[eventId]'>) {
     minute: '2-digit',
   });
 
-  const spotsLeft = event.maxAttendees - event.guests.length;
-  const fillPercent = (event.guests.length / event.maxAttendees) * 100;
+  const spotsLeft = event.maxGuests - event.guests.length;
+  const fillPercent = (event.guests.length / event.maxGuests) * 100;
 
   return (
     <main className="max-w-4xl mx-auto px-4 pt-32 md:pt-40 pb-20">

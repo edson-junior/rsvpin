@@ -1,24 +1,27 @@
 import Link from 'next/link';
 import { LuCalendar, LuMapPin, LuUsers } from 'react-icons/lu';
-import type { Event } from '@/mocks/mockData';
+import type { Event } from '@/database/events';
 import Image from 'next/image';
 
 export function EventCard({
   id,
   name,
-  date,
+  starts_at,
   location,
   location_type,
-  guests,
+  guest_count,
   image,
   category,
 }: Event) {
-  const formattedDate = new Date(date).toLocaleDateString(process.env.LOCALE, {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const formattedDate = new Date(starts_at).toLocaleDateString(
+    process.env.LOCALE,
+    {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    },
+  );
 
   return (
     <Link href={`/events/${id}`} className="group">
@@ -57,7 +60,7 @@ export function EventCard({
         </div>
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <LuUsers className="w-4 h-4" />
-          <span>{guests.length} attending</span>
+          <span>{guest_count} attending</span>
         </div>
       </div>
     </Link>
