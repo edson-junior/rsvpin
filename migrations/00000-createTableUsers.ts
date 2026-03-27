@@ -1,37 +1,49 @@
 import type { Sql } from 'postgres';
-import z from 'zod';
+import { z } from 'zod';
 
-export const animalSchema = z.object({
-  animal: z.object({
-    firstName: z.string().max(30),
-    type: z.string().max(30),
-    accessory: z.string().max(45).nullable(),
-    birthDate: z.coerce.date(),
-  }),
+export const userSchema = z.object({
+  name: z.string().max(120),
+  email: z.email().max(80),
+  password: z.string().max(120),
+  username: z.string().max(100),
+  avatar_url: z.string().nullable(),
+  bio: z.string().nullable(),
+  location: z.string().max(120).nullable(),
+  website: z.string().max(120).nullable(),
 });
 
-export type Animal = {
-  id: number;
-  firstName: string;
-  type: string;
-  accessory: string | null;
-  birthDate: Date;
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  username: string;
+  avatar_url: string | null;
+  bio: string | null;
+  location: string | null;
+  website: string | null;
+  created_at: Date;
+  updated_at: Date;
 };
 
 export async function up(sql: Sql) {
-  // console.log('Creating animals table');
   await sql`
-    CREATE TABLE animals (
-      id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      first_name varchar(30) NOT NULL,
-      type varchar(30) NOT NULL,
-      accessory varchar(45),
-      birth_date date NOT NULL
+    CREATE TABLE users (
+      id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      name varchar(120) NOT NULL,
+      email varchar(80) NOT NULL UNIQUE,
+      password_hash varchar(120) NOT NULL,
+      username varchar(100) NOT NULL UNIQUE,
+      avatar_url text,
+      bio text,
+      location varchar(120),
+      website varchar(120),
+      created_at timestamptz NOT NULL DEFAULT now(),
+      updated_at timestamptz NOT NULL DEFAULT now()
     )
   `;
 }
 
 export async function down(sql: Sql) {
-  // console.log('Dropping animals table');
-  await sql`DROP TABLE animals`;
+  await sql`DROP TABLE users`;
 }

@@ -1,70 +1,71 @@
 import type { Sql } from 'postgres';
 
-const animals = [
+const users = [
   {
-    id: 1,
-    firstName: 'Dennis',
-    type: 'goat',
-    accessory: 'expired library card',
-    birthDate: new Date('2015-04-09'),
+    id: '8b7a4f2e-1d3a-4b9f-9c44-2e7f0c4d9e5a',
+    name: 'Ava Martinez',
+    email: 'ava.martinez@example.com',
+    password_hash: 'P@ssw0rd123!',
+    username: 'avamartinez',
+    avatar_url: 'https://example.com/avatars/ava.png',
+    bio: 'Front-end developer and coffee enthusiast. Loves building accessible web apps.',
+    location: 'San Francisco, CA',
+    website: 'alexjohnson.com',
+    created_at: '2026-03-13T10:25:00Z',
   },
   {
-    id: 2,
-    firstName: 'Monica',
-    type: 'owl',
-    accessory: 'laser pointer',
-    birthDate: new Date('2018-11-02'),
-  },
-  {
-    id: 3,
-    firstName: 'Trevor',
-    type: 'iguana',
-    accessory: 'plastic fork collection',
-    birthDate: new Date('2020-08-17'),
-  },
-  {
-    id: 4,
-    firstName: 'Sharon',
-    type: 'seal',
-    accessory: 'mysterious key labeled "DO NOT"',
-    birthDate: new Date('2016-01-26'),
-  },
-  {
-    id: 5,
-    firstName: 'Paul',
-    type: 'pigeon',
-    accessory: 'tiny briefcase full of bread receipts',
-    birthDate: new Date('2019-07-13'),
+    id: 'f3d9c6a7-5b4e-4a2d-bf11-9c6a8e7f3b2d',
+    name: 'Noah Chen',
+    email: 'noah.chen@example.com',
+    password_hash: 'Secure*Pass456',
+    username: 'noahchen',
+    avatar_url: null,
+    bio: 'Product manager who enjoys hiking and board games on weekends.',
+    location: 'San Francisco, CA',
+    website: 'alexjohnson.com',
+    created_at: '2026-03-13T14:52:00Z',
   },
 ];
 
 export async function up(sql: Sql) {
-  for (const animal of animals) {
+  for (const user of users) {
     await sql`
       INSERT INTO
-        animals (
-          first_name,
-          type,
-          accessory,
-          birth_date
+        users (
+          id,
+          name,
+          email,
+          password_hash,
+          username,
+          avatar_url,
+          bio,
+          location,
+          website,
+          created_at
         )
       VALUES
         (
-          ${animal.firstName},
-          ${animal.type},
-          ${animal.accessory},
-          ${animal.birthDate}
+          ${user.id}::uuid,
+          ${user.name},
+          ${user.email},
+          ${user.password_hash},
+          ${user.username},
+          ${user.avatar_url},
+          ${user.bio},
+          ${user.location},
+          ${user.website},
+          ${user.created_at}
         )
     `;
   }
 }
 
 export async function down(sql: Sql) {
-  for (const animal of animals) {
+  for (const user of users) {
     await sql`
-      DELETE FROM animals
+      DELETE FROM users
       WHERE
-        id = ${animal.id}
+        id = ${user.id}::uuid
     `;
   }
 }
