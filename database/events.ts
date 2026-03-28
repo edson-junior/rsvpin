@@ -23,23 +23,13 @@ export type Event = {
 export const getAllEventsInsecure = cache(async () => {
   return await sql<Event[]>`
     SELECT
-      events.id,
-      events.name,
-      events.description,
-      events.image,
-      events.location,
-      events.category,
-      events.location_type,
-      events.url,
-      events.starts_at,
-      events.ends_at,
-      events.max_guests,
-      events.created_by,
-      events.created_at,
-      count(event_guests.user_id) FILTER (
-        WHERE
-          event_guests.status = 'going'
-      ) AS guest_count
+      events.*,
+      (
+        count(event_guests.user_id) FILTER (
+          WHERE
+            event_guests.status = 'going'
+        )
+      )::integer AS guest_count
     FROM
       events
       LEFT JOIN event_guests ON events.id = event_guests.event_id
