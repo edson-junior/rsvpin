@@ -8,6 +8,7 @@ import {
   TabsTrigger,
 } from '../../components/ui/tabs';
 import { mockEvents, mockUsers } from '@/mocks/mockData';
+import { formatDate } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 
 const mockUser = mockUsers[0];
@@ -86,15 +87,7 @@ const Profile = () => {
           </TabsList>
           <TabsContent value="hosted" className="space-y-3 mt-4">
             {mockEvents.map((event) => {
-              const formattedDate = new Date(event.date).toLocaleDateString(
-                process.env.LOCALE,
-                {
-                  weekday: 'long',
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                },
-              );
+              const formattedDate = formatDate(event.date);
 
               return (
                 <Link

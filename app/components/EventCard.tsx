@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { LuCalendar, LuMapPin, LuUsers } from 'react-icons/lu';
-import type { Event } from '@/database/events';
+import type { Event } from '@/lib/types';
+import { formatDate } from '@/lib/utils';
 import Image from 'next/image';
 
 export function EventCard({
@@ -13,15 +14,7 @@ export function EventCard({
   image,
   category,
 }: Event) {
-  const formattedDate = new Date(startsAt).toLocaleDateString(
-    process.env.LOCALE,
-    {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    },
-  );
+  const formattedDate = formatDate(startsAt);
 
   return (
     <Link href={`/events/${id}`} className="group">
