@@ -1,23 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
+import type { Event } from '@/lib/types';
 import { sql } from './connect';
-
-export type Event = {
-  id: string;
-  name: string;
-  description: string;
-  image: string | null;
-  location: string;
-  category: string;
-  locationType: 'offline' | 'online';
-  url: string | null;
-  startsAt: Date;
-  endsAt: Date;
-  maxGuests: number;
-  createdBy: string;
-  createdAt: Date;
-  guestCount: number;
-};
 
 // "Read" in CRUD
 export const getAllEventsInsecure = cache(async () => {
@@ -38,4 +22,62 @@ export const getAllEventsInsecure = cache(async () => {
     ORDER BY
       events.starts_at ASC
   `;
+});
+
+export const getEventByIdInsecure = cache(async (id: string) => {
+  const [event] = await sql<Event[]>`
+    SELECT
+      events.*,
+      events.starts_at::date AS date,
+      (
+        SELECT
+          coalesce(
+            json_agg(
+              json_build_object(
+                'userId',
+                event_hosts.user_id,
+                'name',
+                users.name,
+                'username',
+                users.username
+              )
+            ),
+            '[]'::json
+          )
+        FROM
+          event_hosts
+          INNER JOIN users ON event_hosts.user_id = users.id
+        WHERE
+          event_hosts.event_id = events.id
+      ) AS hosts,
+      (
+        SELECT
+          coalesce(
+            json_agg(
+              json_build_object(
+                'userId',
+                event_guests.user_id,
+                'name',
+                users.name,
+                'username',
+                users.username,
+                'status',
+                event_guests.status
+              )
+            ),
+            '[]'::json
+          )
+        FROM
+          event_guests
+          INNER JOIN users ON event_guests.user_id = users.id
+        WHERE
+          event_guests.event_id = events.id
+      ) AS guests
+    FROM
+      events
+    WHERE
+      events.id = ${id}
+  `;
+
+  return event;
 });

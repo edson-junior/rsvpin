@@ -1,5 +1,6 @@
 import { Button } from '@/app/components/ui/button';
-import { mockEvents } from '@/mocks/mockData';
+import { getEventByIdInsecure } from '@/database/events';
+import { formatDate, formatTime } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -12,30 +13,17 @@ import {
   LuUsers,
 } from 'react-icons/lu';
 
-export default async function NotePage(props: PageProps<'/events/[eventId]'>) {
+export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
   const { eventId: id } = await props.params;
-  const event = mockEvents.find((e) => e.id === id);
+  const event = await getEventByIdInsecure(id);
   const registered = false;
 
   if (!event) {
     return notFound();
   }
 
-  const formattedDate = new Date(event.date).toLocaleDateString(
-    process.env.LOCALE,
-    {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    },
-  );
-
-  const timeObj = new Date(event.startsAt);
-  const formattedTime = timeObj.toLocaleTimeString(process.env.LOCALE, {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  const formattedDate = formatDate(event.date);
+  const formattedTime = formatTime(event.startsAt);
 
   const spotsLeft = event.maxGuests - event.guests.length;
   const fillPercent = (event.guests.length / event.maxGuests) * 100;
