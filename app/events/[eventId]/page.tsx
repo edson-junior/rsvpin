@@ -31,7 +31,7 @@ export default async function NotePage(props: PageProps<'/events/[eventId]'>) {
     },
   );
 
-  const timeObj = new Date(event.starts_at);
+  const timeObj = new Date(event.startsAt);
   const formattedTime = timeObj.toLocaleTimeString(process.env.LOCALE, {
     hour: '2-digit',
     minute: '2-digit',
@@ -116,7 +116,7 @@ export default async function NotePage(props: PageProps<'/events/[eventId]'>) {
               return (
                 <Link
                   href={`/user/${host.username}`}
-                  key={`host-${host.id}`}
+                  key={`host-${host.userId}`}
                   className="flex items-center gap-3"
                 >
                   <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-sm font-bold text-muted-foreground">
