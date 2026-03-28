@@ -1,4 +1,4 @@
-import { type Event } from '@/database/events';
+import type { Event } from '@/lib/types';
 import { EventCard } from '../components/EventCard';
 
 export default async function Discover() {

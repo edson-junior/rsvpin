@@ -1,4 +1,5 @@
-import { getAllEventsInsecure, type Event } from '@/database/events';
+import { getAllEventsInsecure } from '@/database/events';
+import type { Event } from '@/lib/types';
 import { NextResponse } from 'next/server';
 
 // GET (Read in CRUD)
