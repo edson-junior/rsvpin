@@ -39,8 +39,8 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
       </Link>
 
       {/* Header image */}
-      <div className="aspect-2/1 rounded-2xl bg-secondary relative overflow-hidden mb-8">
-        <div className="w-full h-full bg-linear-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+      <div className="aspect-2/1 rounded-2xl bg-secondary overflow-hidden mb-8">
+        <div className="w-full h-full bg-linear-to-br from-primary/20 to-primary/5 flex items-center justify-center relative">
           {event.image ? (
             <Image
               fill
