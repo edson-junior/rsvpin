@@ -23,6 +23,7 @@ export default async function SignIn() {
               name="email"
               placeholder="you@example.com"
               className={inputClass}
+              required
             />
           </label>
           <label className={labelClass}>
@@ -32,6 +33,7 @@ export default async function SignIn() {
               name="password"
               placeholder="••••••••"
               className={inputClass}
+              required
             />
           </label>
 

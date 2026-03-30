@@ -3,6 +3,7 @@ import { Button } from '@/app/components/ui/button';
 import { mockEvents } from '@/mocks/mockData';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { LuArrowRight } from 'react-icons/lu';
 
 export default async function Edit(
   props: PageProps<'/events/[eventId]/settings'>,
@@ -25,8 +26,9 @@ export default async function Edit(
 
       <EventForm>
         <div className="flex gap-3">
-          <Button type="submit" className="flex-1">
+          <Button type="submit" className="group flex-1">
             Save Changes
+            <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Button>
 
           <Button variant="outline" asChild>

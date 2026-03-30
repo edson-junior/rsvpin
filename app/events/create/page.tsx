@@ -1,5 +1,6 @@
 import EventForm from '@/app/components/EventForm';
 import { Button } from '@/app/components/ui/button';
+import { LuArrowRight } from 'react-icons/lu';
 
 export default async function Create() {
   return (
@@ -12,8 +13,9 @@ export default async function Create() {
       </p>
 
       <EventForm>
-        <Button className="w-full py-3.5 px-6 rounded-md bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
+        <Button className="group w-full py-3.5 px-6 rounded-md bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
           Create Event
+          <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
         </Button>
       </EventForm>
     </main>

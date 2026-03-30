@@ -23,6 +23,7 @@ export default async function SignUp() {
               placeholder="Your name"
               className={inputClass}
               maxLength={100}
+              required
             />
           </label>
           <label className={labelClass}>
@@ -31,6 +32,7 @@ export default async function SignUp() {
               type="email"
               placeholder="you@example.com"
               className={inputClass}
+              required
             />
           </label>
           <label className={labelClass}>
@@ -39,6 +41,7 @@ export default async function SignUp() {
               type="password"
               placeholder="At least 6 characters"
               className={inputClass}
+              required
             />
           </label>
 

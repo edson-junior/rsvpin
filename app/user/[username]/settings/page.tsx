@@ -79,7 +79,7 @@ const Settings = () => {
                 <input
                   readOnly
                   type="text"
-                  value={location}
+                  value={location ?? ''}
                   className={inputClass}
                   maxLength={100}
                 />
@@ -91,7 +91,7 @@ const Settings = () => {
                 <input
                   type="url"
                   readOnly
-                  value={website}
+                  value={website ?? ''}
                   className={inputClass}
                   placeholder="https://"
                   maxLength={200}
