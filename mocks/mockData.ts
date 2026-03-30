@@ -1,6 +1,28 @@
-import type { Event, EventGuest, EventHost, User } from '@/lib/types';
+import type { EventDetails, EventGuest, EventHost, User } from '@/lib/types';
 
-export const eventHosts: EventHost[] = [
+type MockEventHost = EventHost & { eventId: string; createdAt: string };
+type MockEventGuest = EventGuest & { eventId: string; createdAt: string };
+type MockEvent = Omit<
+  EventDetails,
+  | 'date'
+  | 'startsAt'
+  | 'endsAt'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'url'
+  | 'hosts'
+  | 'guests'
+> & {
+  date: string;
+  startsAt: string;
+  endsAt: string;
+  createdAt: string;
+  url?: string | null;
+  hosts: MockEventHost[];
+  guests: MockEventGuest[];
+};
+
+export const eventHosts: MockEventHost[] = [
   {
     eventId: 'd2f1c3a9-4b5e-4c77-a2f1-5e3a9b8c4d2f',
     userId: '8b7a4f2e-1d3a-4b9f-9c44-2e7f0c4d9e5a',
@@ -17,7 +39,7 @@ export const eventHosts: EventHost[] = [
   },
 ];
 
-export const eventGuests: EventGuest[] = [
+export const eventGuests: MockEventGuest[] = [
   {
     eventId: 'd2f1c3a9-4b5e-4c77-a2f1-5e3a9b8c4d2f',
     userId: 'f3d9c6a7-5b4e-4a2d-bf11-9c6a8e7f3b2d',
@@ -67,7 +89,7 @@ export const mockUsers: User[] = [
   },
 ];
 
-export const mockEvents: Event[] = [
+export const mockEvents: MockEvent[] = [
   {
     id: 'd2f1c3a9-4b5e-4c77-a2f1-5e3a9b8c4d2f',
     name: 'Spring Community Meetup',

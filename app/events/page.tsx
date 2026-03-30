@@ -1,4 +1,4 @@
-import type { Event } from '@/lib/types';
+import type { EventWithGuestCount } from '@/lib/types';
 import { EventCard } from '../components/EventCard';
 
 export default async function Discover() {
@@ -9,7 +9,7 @@ export default async function Discover() {
     return <p>Error while fetching data</p>;
   }
 
-  const events: Event[] = await data.json();
+  const events: EventWithGuestCount[] = await data.json();
 
   return (
     <main className="container mx-auto px-4 pt-32 md:pt-40 pb-20 max-w-7xl">
@@ -31,7 +31,7 @@ export default async function Discover() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event) => (
-            <EventCard key={event.id} {...event} />
+            <EventCard key={`event-${event.id}`} {...event} />
           ))}
         </div>
       </div>

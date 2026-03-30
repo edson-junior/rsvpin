@@ -25,8 +25,11 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
   const formattedDate = formatDate(event.date);
   const formattedTime = formatTime(event.startsAt);
 
-  const spotsLeft = event.maxGuests - event.guests.length;
-  const fillPercent = (event.guests.length / event.maxGuests) * 100;
+  const guests = event.guests ?? [];
+  const hosts = event.hosts ?? [];
+
+  const spotsLeft = event.maxGuests - guests.length;
+  const fillPercent = (guests.length / event.maxGuests) * 100;
 
   return (
     <main className="max-w-4xl mx-auto px-4 pt-32 md:pt-40 pb-20">
@@ -100,7 +103,7 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
             <h2 className="font-display text-lg font-semibold text-foreground mb-3">
               Hosted by
             </h2>
-            {event.hosts.map((host) => {
+            {hosts.map((host) => {
               return (
                 <Link
                   href={`/user/${host.username}`}
@@ -131,7 +134,7 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
               <div className="flex items-center justify-between text-sm mb-2">
                 <span className="text-muted-foreground flex items-center gap-1.5">
                   <LuUsers className="w-3.5 h-3.5" />
-                  {event.guests.length} attending
+                  {guests.length} attending
                 </span>
                 <span className="text-muted-foreground">
                   {spotsLeft} spots left

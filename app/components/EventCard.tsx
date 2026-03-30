@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { LuCalendar, LuMapPin, LuUsers } from 'react-icons/lu';
-import type { Event } from '@/lib/types';
+import type { EventWithGuestCount } from '@/lib/types';
 import { formatDate } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -13,7 +13,7 @@ export function EventCard({
   guestCount,
   image,
   category,
-}: Event) {
+}: EventWithGuestCount) {
   const formattedDate = formatDate(startsAt);
 
   return (

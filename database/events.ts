@@ -1,19 +1,13 @@
-import 'server-only';
+'server-only';
 import { cache } from 'react';
-import type { Event } from '@/lib/types';
+import type { EventDetails, Event } from '@/lib/types';
 import { sql } from './connect';
 
 // "Read" in CRUD
 export const getAllEventsInsecure = cache(async () => {
   return await sql<Event[]>`
     SELECT
-      events.*,
-      (
-        count(event_guests.user_id) FILTER (
-          WHERE
-            event_guests.status = 'going'
-        )
-      )::integer AS guest_count
+      events.*
     FROM
       events
       LEFT JOIN event_guests ON events.id = event_guests.event_id
@@ -25,7 +19,7 @@ export const getAllEventsInsecure = cache(async () => {
 });
 
 export const getEventByIdInsecure = cache(async (id: string) => {
-  const [event] = await sql<Event[]>`
+  const [event] = await sql<EventDetails[]>`
     SELECT
       events.*,
       events.starts_at::date AS date,
@@ -76,7 +70,7 @@ export const getEventByIdInsecure = cache(async (id: string) => {
     FROM
       events
     WHERE
-      events.id = ${id}
+      events.id = ${id}::uuid
   `;
 
   return event;

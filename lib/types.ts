@@ -19,34 +19,37 @@ export type Event = {
   name: string;
   description: string;
   image: string | null;
-  date: string;
   location: string;
   category: string;
   locationType: 'offline' | 'online';
-  url?: string | null;
-  startsAt: string | Date;
-  endsAt: string | Date;
+  url: string | null;
+  startsAt: Date;
+  endsAt: Date;
   maxGuests: number;
   createdBy: string;
-  createdAt: string | Date;
-  guestCount?: number;
-  hosts: EventHost[];
-  guests: EventGuest[];
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type EventHost = {
   userId: string;
-  eventId: string;
   name: string;
   username: string;
-  createdAt: string;
 };
 
 export type EventGuest = {
   userId: string;
-  eventId: string;
   name: string;
   username: string;
-  status: 'going' | 'not_going';
-  createdAt: string;
+  status: 'going' | 'not_going' | null;
+};
+
+export type EventDetails = Event & {
+  date: Date;
+  hosts: EventHost[] | null;
+  guests: EventGuest[] | null;
+};
+
+export type EventWithGuestCount = Event & {
+  guestCount: number;
 };
