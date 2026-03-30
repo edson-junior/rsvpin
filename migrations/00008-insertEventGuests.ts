@@ -29,8 +29,8 @@ export async function up(sql: Sql) {
         (
           ${guest.event_id}::uuid,
           ${guest.user_id}::uuid,
-          ${guest.status},
-          ${guest.created_at}
+          ${guest.status}::guest_status,
+          ${guest.created_at}::timestamptz
         )
     `;
   }

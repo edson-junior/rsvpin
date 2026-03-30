@@ -22,7 +22,7 @@ export async function up(sql: Sql) {
         (
           ${host.event_id}::uuid,
           ${host.user_id}::uuid,
-          ${host.created_at}
+          ${host.created_at}::timestamptz
         )
     `;
   }

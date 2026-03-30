@@ -54,7 +54,7 @@ export async function up(sql: Sql) {
           ${user.bio},
           ${user.location},
           ${user.website},
-          ${user.created_at}
+          ${user.created_at}::timestamptz
         )
     `;
   }

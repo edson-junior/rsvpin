@@ -5,7 +5,7 @@ export async function up(sql: Sql) {
     CREATE TABLE event_guests (
       event_id uuid NOT NULL REFERENCES events (id) ON DELETE CASCADE,
       user_id uuid NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-      status guest_status DEFAULT 'going',
+      status guest_status NOT NULL DEFAULT 'going',
       created_at timestamptz NOT NULL DEFAULT now(),
       PRIMARY KEY (event_id, user_id)
     )

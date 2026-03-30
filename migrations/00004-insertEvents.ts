@@ -64,13 +64,13 @@ export async function up(sql: Sql) {
           ${event.image},
           ${event.location},
           ${event.category},
-          ${event.location_type},
+          ${event.location_type}::location_type,
           ${event.url},
-          ${event.starts_at},
-          ${event.ends_at},
+          ${event.starts_at}::timestamptz,
+          ${event.ends_at}::timestamptz,
           ${event.max_guests},
           ${event.created_by}::uuid,
-          ${event.created_at}
+          ${event.created_at}::timestamptz
         )
     `;
   }
