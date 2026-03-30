@@ -34,26 +34,26 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <a
-              href="#"
+            <Link
+              href="/"
               className="text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               <LuTwitter size={18} />
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/"
               className="text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               <LuInstagram size={18} />
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/"
               className="text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               <LuLinkedin size={18} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

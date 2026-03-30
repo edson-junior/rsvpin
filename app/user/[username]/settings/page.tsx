@@ -35,24 +35,30 @@ const Settings = () => {
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">
+                <label
+                  htmlFor="name"
+                  className="text-sm font-medium text-foreground mb-1.5 block"
+                >
                   Name
                 </label>
                 <input
+                  id="name"
                   readOnly
-                  type="text"
                   value={name}
                   className={inputClass}
                   maxLength={100}
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">
+                <label
+                  htmlFor="username"
+                  className="text-sm font-medium text-foreground mb-1.5 block"
+                >
                   Username
                 </label>
                 <input
+                  id="username"
                   readOnly
-                  type="text"
                   value={username}
                   className={inputClass}
                   maxLength={30}
@@ -60,10 +66,14 @@ const Settings = () => {
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-foreground mb-1.5 block">
+              <label
+                htmlFor="bio"
+                className="text-sm font-medium text-foreground mb-1.5 block"
+              >
                 Bio
               </label>
               <textarea
+                id="bio"
                 readOnly
                 value={bio ?? ''}
                 rows={3}
@@ -73,22 +83,29 @@ const Settings = () => {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">
+                <label
+                  htmlFor="location"
+                  className="text-sm font-medium text-foreground mb-1.5 block"
+                >
                   Location
                 </label>
                 <input
+                  id="location"
                   readOnly
-                  type="text"
                   value={location ?? ''}
                   className={inputClass}
                   maxLength={100}
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">
+                <label
+                  htmlFor="website"
+                  className="text-sm font-medium text-foreground mb-1.5 block"
+                >
                   Website
                 </label>
                 <input
+                  id="website"
                   type="url"
                   readOnly
                   value={website ?? ''}

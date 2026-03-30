@@ -1,7 +1,7 @@
 // Add the "poison pill" from 'server-only'
 // to prevent using this file in a Client
 // Component
-import 'server-only';
+'server-only';
 import postgres, { type Sql } from 'postgres';
 import postgresJsConfig from '../ley.config.js';
 import { setEnvironmentVariables } from '../lib/config';

@@ -12,12 +12,12 @@ function EventForm({ children }: Props) {
   return (
     <form className="space-y-5">
       <div>
-        <label className={eventFormLabelClass}>
+        <label htmlFor="name" className={eventFormLabelClass}>
           <LuType className={iconClass} />
           Event Title <span className="text-red-600 text-lg font-bold">*</span>
         </label>
         <input
-          type="text"
+          id="name"
           placeholder="e.g. Design Systems Workshop"
           className={inputClass}
           maxLength={100}
@@ -27,28 +27,28 @@ function EventForm({ children }: Props) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className={eventFormLabelClass}>
+          <label htmlFor="date" className={eventFormLabelClass}>
             <LuCalendar className={iconClass} />
             Date <span className="text-red-600 text-lg font-bold">*</span>
           </label>
-          <input type="date" className={inputClass} required />
+          <input id="date" type="date" className={inputClass} required />
         </div>
         <div>
-          <label className={eventFormLabelClass}>
+          <label htmlFor="time" className={eventFormLabelClass}>
             <LuClock className={iconClass} />
             Time <span className="text-red-600 text-lg font-bold">*</span>
           </label>
-          <input type="time" className={inputClass} required />
+          <input id="time" type="time" className={inputClass} required />
         </div>
       </div>
 
       <div>
-        <label className={eventFormLabelClass}>
+        <label htmlFor="location" className={eventFormLabelClass}>
           <LuMapPin className={iconClass} />
           Location <span className="text-red-600 text-lg font-bold">*</span>
         </label>
         <input
-          type="text"
+          id="location"
           placeholder="e.g. San Francisco, CA"
           className={inputClass}
           maxLength={200}
@@ -57,12 +57,12 @@ function EventForm({ children }: Props) {
       </div>
 
       <div>
-        <label className={eventFormLabelClass}>
+        <label htmlFor="category" className={eventFormLabelClass}>
           <LuTag className={iconClass} />
           Category <span className="text-red-600 text-lg font-bold">*</span>
         </label>
         <input
-          type="text"
+          id="category"
           placeholder="e.g. Tech"
           className={inputClass}
           maxLength={200}
@@ -71,11 +71,12 @@ function EventForm({ children }: Props) {
       </div>
 
       <div>
-        <label className={eventFormLabelClass}>
+        <label htmlFor="description" className={eventFormLabelClass}>
           <LuType className={iconClass} />
           Description <span className="text-red-600 text-lg font-bold">*</span>
         </label>
         <textarea
+          id="description"
           placeholder="Tell people what your event is about..."
           rows={5}
           className={`${inputClass} resize-none`}

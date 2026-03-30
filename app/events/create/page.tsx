@@ -2,7 +2,7 @@ import EventForm from '@/app/components/EventForm';
 import { Button } from '@/app/components/ui/button';
 import { LuArrowRight } from 'react-icons/lu';
 
-export default async function Create() {
+export default function Create() {
   return (
     <main className="container mx-auto px-4 pt-32 md:pt-40 pb-20 max-w-2xl">
       <h1 className="font-display text-3xl font-bold text-foreground mb-2">

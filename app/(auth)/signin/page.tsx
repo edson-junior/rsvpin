@@ -3,7 +3,7 @@ import { inputClass, labelClass } from '../../components/ui/input';
 import { Button } from '../../components/ui/button';
 import { LuArrowRight } from 'react-icons/lu';
 
-export default async function SignIn() {
+export default function SignIn() {
   return (
     <main className="max-w-7xl mx-auto px-4 pt-32 md:pt-40 pb-20 md:h-[80vh]">
       <div className="flex flex-col items-center justify-center">

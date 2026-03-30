@@ -64,7 +64,7 @@ const Profile = () => {
             { label: 'Attended', value: mockUser.eventsAttended },
           ].map((stat) => (
             <div
-              key={stat.label}
+              key={`stat-${stat.label}`}
               className="rounded-xl bg-card border border-border p-4 text-center"
             >
               <p className="font-display text-2xl font-bold text-foreground">
@@ -91,7 +91,7 @@ const Profile = () => {
 
               return (
                 <Link
-                  key={event.id}
+                  key={`event-${event.id}`}
                   href={`/event/${event.id}`}
                   className="flex items-center justify-between p-4 rounded-xl bg-card border border-border hover:bg-secondary/50 transition-colors"
                 >

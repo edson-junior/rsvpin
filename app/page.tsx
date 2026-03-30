@@ -2,7 +2,7 @@ import { LuArrowRight, LuSparkles } from 'react-icons/lu';
 import Link from 'next/link';
 import { Button } from './components/ui/button';
 
-export default async function Home() {
+export default function Home() {
   return (
     <main className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 h-screen md:h-[80vh] flex items-center">
       <div className="max-w-7xl mx-auto">
