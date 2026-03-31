@@ -3,10 +3,15 @@
 import Link from 'next/link';
 import { Logo } from './ui/logo';
 import { useState } from 'react';
-import { LuMenu, LuUser, LuX } from 'react-icons/lu';
+import { LuMenu, LuUser, LuX, LuLogOut } from 'react-icons/lu';
 import { Button } from './ui/button';
+import { signOut } from '../(auth)/actions';
 
-function Header() {
+type HeaderProps = {
+  user?: { name: string; username: string };
+};
+
+function Header({ user }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -22,11 +27,26 @@ function Header() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <Button asChild>
-            <Link href="/signin">
-              <LuUser /> Sign in
-            </Link>
-          </Button>
+          {user ? (
+            <>
+              <Button variant="link" asChild>
+                <Link href={`/user/${user.username}`}>
+                  <LuUser /> {user.name}
+                </Link>
+              </Button>
+              <form action={signOut}>
+                <Button variant="outline" type="submit">
+                  <LuLogOut /> Sign out
+                </Button>
+              </form>
+            </>
+          ) : (
+            <Button asChild>
+              <Link href="/signin">
+                <LuUser /> Sign in
+              </Link>
+            </Button>
+          )}
         </div>
 
         <button
@@ -60,13 +80,34 @@ function Header() {
               Create Event
             </Link>
 
-            <Link
-              href="/signin"
-              onClick={() => setMobileOpen(false)}
-              className="px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground text-center"
-            >
-              Sign in
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  href={`/user/${user.username}`}
+                  className="px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Profile
+                </Link>
+                <form action={signOut}>
+                  <Button
+                    className="w-full"
+                    variant="outline"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <LuLogOut /> Sign out
+                  </Button>
+                </form>
+              </>
+            ) : (
+              <Link
+                href="/signin"
+                onClick={() => setMobileOpen(false)}
+                className="px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground text-center"
+              >
+                Sign in
+              </Link>
+            )}
           </nav>
         </div>
       )}

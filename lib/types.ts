@@ -2,7 +2,6 @@ export type User = {
   id: string;
   name: string;
   email: string;
-  passwordHash: string;
   username: string;
   avatarUrl: string | null;
   bio: string | null;

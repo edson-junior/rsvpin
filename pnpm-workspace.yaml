@@ -1,4 +1,5 @@
 ignoredBuiltDependencies:
+  - bcrypt
   - msw
   - sharp
   - unrs-resolver
@@ -6,7 +7,7 @@ ignoredBuiltDependencies:
 minimumReleaseAge: 10080
 
 minimumReleaseAgeExclude:
-  - "@upleveled/*"
+  - '@upleveled/*'
   - eslint-config-upleveled
   - stylelint-config-upleveled
 

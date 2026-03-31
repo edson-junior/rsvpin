@@ -1,9 +1,25 @@
+import { getValidSession } from '@/database/sessions';
+import { getSessionToken } from '@/lib/auth';
 import Link from 'next/link';
-import { inputClass, labelClass } from '../../components/ui/input';
-import { Button } from '../../components/ui/button';
-import { LuArrowRight } from 'react-icons/lu';
+import { redirect } from 'next/navigation';
+import SignUpForm from './SignUpForm';
 
-export default function SignUp() {
+export default async function SignUpPage(props: PageProps<'/signup'>) {
+  // Logged in user redirect steps in page
+  // 1. Get session token from cookie
+  const sessionToken = await getSessionToken();
+
+  // 2. Check if session token is valid
+  const session = !!sessionToken && (await getValidSession(sessionToken));
+
+  // 3. If session token is valid, redirect to homepage
+  if (session) {
+    redirect('/');
+  }
+
+  const searchParams = await props.searchParams;
+  const returnTo = searchParams.returnTo;
+
   return (
     <main className="max-w-7xl mx-auto px-4 pt-32 md:pt-40 pb-20 md:h-[80vh]">
       <div className="flex flex-col items-center justify-center">
@@ -15,40 +31,7 @@ export default function SignUp() {
           something amazing.
         </p>
 
-        <form className="w-full max-w-sm">
-          <label className={labelClass}>
-            Name
-            <input
-              placeholder="Your name"
-              className={inputClass}
-              maxLength={100}
-              required
-            />
-          </label>
-          <label className={labelClass}>
-            Email
-            <input
-              type="email"
-              placeholder="you@example.com"
-              className={inputClass}
-              required
-            />
-          </label>
-          <label className={labelClass}>
-            Password
-            <input
-              type="password"
-              placeholder="At least 6 characters"
-              className={inputClass}
-              required
-            />
-          </label>
-
-          <Button className="group w-full">
-            <span>Sign up</span>
-            <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </form>
+        <SignUpForm returnTo={returnTo} />
 
         <p className="text-muted-foreground text-sm border-t border-border pt-8 mt-8 text-center">
           Already have an account?{' '}

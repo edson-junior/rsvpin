@@ -1,6 +1,7 @@
 import type { Sql } from 'postgres';
 import { z } from 'zod';
 
+// TODO: use this schema to parse data from user/settings page
 export const userSchema = z.object({
   name: z.string().max(120),
   email: z.email().max(80),

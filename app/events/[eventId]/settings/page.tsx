@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LuArrowRight } from 'react-icons/lu';
 
-export default async function Edit(
+export default async function EditEventPage(
   props: PageProps<'/events/[eventId]/settings'>,
 ) {
   const { eventId: id } = await props.params;

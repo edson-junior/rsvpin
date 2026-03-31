@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { getUserBySessionToken } from '@/database/users';
+import { getSessionToken } from '@/lib/auth';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -19,17 +21,24 @@ export const metadata: Metadata = {
   description: 'Create events that inspire people.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const sessionToken = await getSessionToken();
+  const user = sessionToken
+    ? await getUserBySessionToken(sessionToken)
+    : undefined;
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
+        <Header
+          user={user ? { name: user.name, username: user.username } : undefined}
+        />
         {children}
         <Footer />
       </body>
