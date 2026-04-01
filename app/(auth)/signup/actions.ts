@@ -1,4 +1,5 @@
 'use server';
+
 import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
@@ -70,13 +71,14 @@ export async function signUp(
   const { name, email, username, password } = result.data;
   const normalizedEmail = email.toLowerCase();
   const normalizedUsername = username.toLowerCase();
-
   const existingEmail = await getUserByEmailInsecure(normalizedEmail);
+
   if (existingEmail) {
     return { errors: { email: 'An account with this email already exists.' } };
   }
 
   const existingUsername = await getUserByUsernameInsecure(normalizedUsername);
+
   if (existingUsername) {
     return { errors: { username: 'This username is already taken.' } };
   }

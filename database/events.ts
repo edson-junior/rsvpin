@@ -1,13 +1,14 @@
 'server-only';
 import { cache } from 'react';
-import type { EventDetails, Event } from '@/lib/types';
+import type { EventDetails, EventWithGuestCount } from '@/lib/types';
 import { sql } from './connect';
 
 // "Read" in CRUD
 export const getAllEventsInsecure = cache(async () => {
-  return await sql<Event[]>`
+  return await sql<EventWithGuestCount[]>`
     SELECT
-      events.*
+      events.*,
+      count(event_guests.user_id)::int AS guest_count
     FROM
       events
       LEFT JOIN event_guests ON events.id = event_guests.event_id

@@ -10,9 +10,9 @@ export function EventCard({
   startsAt,
   location,
   locationType,
-  guestCount,
   image,
   category,
+  guestCount,
 }: EventWithGuestCount) {
   const formattedDate = formatDate(startsAt);
 
