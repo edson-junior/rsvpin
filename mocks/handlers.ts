@@ -15,6 +15,6 @@ export const handlers = [
     const event = mockEvents.find((e) => e.id === eventId);
     return event
       ? HttpResponse.json(event)
-      : HttpResponse.json({ message: 'Event not found' });
+      : HttpResponse.json({ message: 'Event not found' }, { status: 404 });
   }),
 ];
