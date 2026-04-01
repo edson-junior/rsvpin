@@ -43,7 +43,7 @@ export async function createSession(
   return session!;
 }
 
-export const deleteSession = cache(async (sessionToken: Session['token']) => {
+export const deleteSession = async (sessionToken: Session['token']) => {
   const [session] = await sql<Session[]>`
     DELETE FROM sessions
     WHERE
@@ -53,4 +53,4 @@ export const deleteSession = cache(async (sessionToken: Session['token']) => {
   `;
 
   return session;
-});
+};

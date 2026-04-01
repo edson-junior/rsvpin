@@ -50,35 +50,33 @@ export const getUserByUsernameInsecure = cache(async (username: string) => {
   return user;
 });
 
-export const createUserInsecure = cache(
-  async (
-    name: User['name'],
-    email: string,
-    username: User['username'],
-    passwordHash: UserWithPasswordHash['passwordHash'],
-  ) => {
-    const [user] = await sql<UserAuth[]>`
-      INSERT INTO
-        users (
-          name,
-          email,
-          username,
-          password_hash
-        )
-      VALUES
-        (
-          ${name},
-          ${email},
-          ${username.toLowerCase()},
-          ${passwordHash}
-        )
-      RETURNING
-        users.id
-    `;
+export const createUserInsecure = async (
+  name: User['name'],
+  email: string,
+  username: User['username'],
+  passwordHash: UserWithPasswordHash['passwordHash'],
+) => {
+  const [user] = await sql<UserAuth[]>`
+    INSERT INTO
+      users (
+        name,
+        email,
+        username,
+        password_hash
+      )
+    VALUES
+      (
+        ${name},
+        ${email},
+        ${username.toLowerCase()},
+        ${passwordHash}
+      )
+    RETURNING
+      users.id
+  `;
 
-    return user;
-  },
-);
+  return user;
+};
 
 export const getUserBySessionToken = cache(
   async (sessionToken: Session['token']) => {
