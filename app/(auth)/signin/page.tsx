@@ -1,9 +1,30 @@
 import Link from 'next/link';
-import { inputClass, labelClass } from '../../components/ui/input';
-import { Button } from '../../components/ui/button';
-import { LuArrowRight } from 'react-icons/lu';
+import SignInForm from './SignInForm';
+import { getValidSession } from '@/database/sessions';
+import { redirect } from 'next/navigation';
+import { getSessionToken } from '@/lib/auth';
 
-export default function SignIn() {
+export const metadata = {
+  title: 'Sign',
+  description: 'Login for Widgets Anonymous',
+};
+
+export default async function SignInPage(props: PageProps<'/signin'>) {
+  // Logged in user redirect steps in page
+  // 1. Get session token from cookie
+  const sessionToken = await getSessionToken();
+
+  // 2. Check if session token is valid
+  const session = !!sessionToken && (await getValidSession(sessionToken));
+
+  // 3. If session token is valid, redirect to homepage
+  if (session) {
+    redirect('/');
+  }
+
+  const searchParams = await props.searchParams;
+  const returnTo = searchParams.returnTo;
+
   return (
     <main className="max-w-7xl mx-auto px-4 pt-32 md:pt-40 pb-20 md:h-[80vh]">
       <div className="flex flex-col items-center justify-center">
@@ -15,33 +36,7 @@ export default function SignIn() {
           Sign in to your RSVPin account.
         </p>
 
-        <form className="w-full max-w-sm">
-          <label className={labelClass}>
-            Email address
-            <input
-              type="email"
-              name="email"
-              placeholder="you@example.com"
-              className={inputClass}
-              required
-            />
-          </label>
-          <label className={labelClass}>
-            Password
-            <input
-              type="password"
-              name="password"
-              placeholder="••••••••"
-              className={inputClass}
-              required
-            />
-          </label>
-
-          <Button className="group w-full">
-            <span>Sign in</span>
-            <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </form>
+        <SignInForm returnTo={returnTo} />
 
         <p className="text-muted-foreground text-sm border-t border-border pt-8 mt-8 text-center">
           Don't have an account?{' '}

@@ -1,8 +1,26 @@
 import { Button } from '@/app/components/ui/button';
+import { getValidSession } from '@/database/sessions';
+import { getSessionToken } from '@/lib/auth';
 import { mockUsers } from '@/mocks/mockData';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
-const Settings = () => {
+export default async function Settings(
+  props: PageProps<'/user/[username]/settings'>,
+) {
+  const { username: usernameParam } = await props.params;
+
+  // Dashboard authorization steps in page
+  // 1. Get session token from cookie
+  const sessionToken = await getSessionToken();
+
+  // 2. Check if session token is valid
+  const session = !!sessionToken && (await getValidSession(sessionToken));
+
+  // 3. If sessionToken is invalid, redirect to login page
+  if (!session) {
+    redirect(`/signin?returnTo=/user/${usernameParam}/settings`);
+  }
+
   const user = mockUsers[0];
 
   if (!user) {
@@ -26,6 +44,7 @@ const Settings = () => {
           </p>
         </div>
 
+        {/* TODO: create suspense wrapper, along with a skeleton, and render form only on client side */}
         <hr className="shrink-0 bg-border h-px w-full my-8" />
 
         <form className="space-y-8">
@@ -149,6 +168,4 @@ const Settings = () => {
       </div>
     </main>
   );
-};
-
-export default Settings;
+}

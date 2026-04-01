@@ -1,6 +1,7 @@
 import type { Sql } from 'postgres';
 import { z } from 'zod';
 
+// TODO: use this schema to parse data from user/settings page
 export const userSchema = z.object({
   name: z.string().max(120),
   email: z.email().max(80),
@@ -11,20 +12,6 @@ export const userSchema = z.object({
   location: z.string().max(120).nullable(),
   website: z.string().max(120).nullable(),
 });
-
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  username: string;
-  avatar_url: string | null;
-  bio: string | null;
-  location: string | null;
-  website: string | null;
-  created_at: Date;
-  updated_at: Date;
-};
 
 export async function up(sql: Sql) {
   await sql`

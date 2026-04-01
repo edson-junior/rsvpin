@@ -13,7 +13,7 @@ const Footer = () => {
             Delightful event experiences for communities everywhere.
           </p>
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Luma. All rights reserved.
+            © {new Date().getFullYear()} RSVPin. All rights reserved.
           </p>
         </div>
 

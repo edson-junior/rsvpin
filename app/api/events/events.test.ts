@@ -16,7 +16,9 @@ afterAll(() => {
 
 describe('api/events', () => {
   it('should return events', async () => {
-    const response = await fetch('http://localhost/api/events');
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/events`,
+    );
     const data = await response.json();
 
     expect(response.status).toBe(200);
