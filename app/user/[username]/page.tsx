@@ -92,7 +92,7 @@ const Profile = () => {
               return (
                 <Link
                   key={`event-${event.id}`}
-                  href={`/event/${event.id}`}
+                  href={`/events/${event.id}`}
                   className="flex items-center justify-between p-4 rounded-xl bg-card border border-border hover:bg-secondary/50 transition-colors"
                 >
                   <div>

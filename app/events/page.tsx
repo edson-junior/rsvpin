@@ -2,7 +2,7 @@ import type { EventWithGuestCount } from '@/lib/types';
 import { EventCard } from '../components/EventCard';
 
 export default async function Discover() {
-  const data = await fetch('http://localhost:3000/api/events');
+  const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/events`);
 
   if (!data.ok) {
     console.error(data.statusText);
