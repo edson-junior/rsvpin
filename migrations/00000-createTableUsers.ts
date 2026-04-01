@@ -13,20 +13,6 @@ export const userSchema = z.object({
   website: z.string().max(120).nullable(),
 });
 
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  username: string;
-  avatar_url: string | null;
-  bio: string | null;
-  location: string | null;
-  website: string | null;
-  created_at: Date;
-  updated_at: Date;
-};
-
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE users (
