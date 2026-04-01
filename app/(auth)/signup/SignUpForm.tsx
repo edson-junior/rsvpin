@@ -26,7 +26,7 @@ export default function SignUpForm({ returnTo }: Props) {
           required
         />
         {state.errors?.name && (
-          <span className="text-red-500 text-xs mt-1">{state.errors.name}</span>
+          <p className="text-red-500 text-sm mt-2">{state.errors.name}</p>
         )}
       </label>
       <label className={labelClass}>
@@ -39,9 +39,7 @@ export default function SignUpForm({ returnTo }: Props) {
           required
         />
         {state.errors?.email && (
-          <span className="text-red-500 text-xs mt-1">
-            {state.errors.email}
-          </span>
+          <p className="text-red-500 text-sm mt-2">{state.errors.email}</p>
         )}
       </label>
       <label className={labelClass}>
@@ -54,9 +52,7 @@ export default function SignUpForm({ returnTo }: Props) {
           required
         />
         {state.errors?.username && (
-          <span className="text-red-500 text-xs mt-1">
-            {state.errors.username}
-          </span>
+          <p className="text-red-500 text-sm mt-2">{state.errors.username}</p>
         )}
       </label>
       <label className={labelClass}>
@@ -69,9 +65,7 @@ export default function SignUpForm({ returnTo }: Props) {
           required
         />
         {state.errors?.password && (
-          <span className="text-red-500 text-xs mt-1">
-            {state.errors.password}
-          </span>
+          <p className="text-red-500 text-sm mt-2">{state.errors.password}</p>
         )}
       </label>
 
