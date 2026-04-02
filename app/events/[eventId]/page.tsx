@@ -1,5 +1,6 @@
 import { Button } from '@/app/components/ui/button';
-import { getEventByIdInsecure } from '@/database/events';
+import { getEventByIdInsecure, isEventHost } from '@/database/events';
+import { getSessionToken } from '@/lib/auth';
 import { formatDate, formatTime } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,6 +18,9 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
   const { eventId: id } = await props.params;
   const event = await getEventByIdInsecure(id);
   const registered = false;
+
+  const sessionToken = await getSessionToken();
+  const isHost = sessionToken ? await isEventHost(sessionToken, id) : false;
 
   if (!event) {
     return notFound();
@@ -159,14 +163,16 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
               <Button className="w-full">Register</Button>
             )}
 
-            <Button variant="destructive" asChild>
-              <Link
-                href={`/events/${event.id}/settings`}
-                className="w-full mt-2"
-              >
-                Edit event
-              </Link>
-            </Button>
+            {isHost && (
+              <Button variant="destructive" asChild>
+                <Link
+                  href={`/events/${event.id}/settings`}
+                  className="w-full mt-2"
+                >
+                  Edit event
+                </Link>
+              </Button>
+            )}
 
             <Button variant="outline" className="w-full mt-3">
               <LuShare2 className="w-3.5 h-3.5" />

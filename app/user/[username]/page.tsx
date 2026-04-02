@@ -10,10 +10,20 @@ import {
 import { mockEvents, mockUsers } from '@/mocks/mockData';
 import { formatDate } from '@/lib/utils';
 import { notFound } from 'next/navigation';
+import { getUserBySessionToken } from '@/database/users';
+import { getSessionToken } from '@/lib/auth';
 
 const mockUser = mockUsers[0];
 
-const Profile = () => {
+const Profile = async (props: PageProps<'/user/[username]'>) => {
+  const { username: usernameParam } = await props.params;
+
+  const sessionToken = await getSessionToken();
+  const loggedInUser = sessionToken
+    ? await getUserBySessionToken(sessionToken)
+    : undefined;
+  const isOwner = loggedInUser?.username === usernameParam;
+
   if (!mockUser) {
     return notFound();
   }
@@ -33,13 +43,15 @@ const Profile = () => {
                   {mockUser.username}
                 </p>
               </div>
-              <div className="sm:ml-auto flex gap-2">
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={`/user/${mockUser.username}/settings`}>
-                    Edit profile
-                  </Link>
-                </Button>
-              </div>
+              {isOwner && (
+                <div className="sm:ml-auto flex gap-2">
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={`/user/${usernameParam}/settings`}>
+                      Edit profile
+                    </Link>
+                  </Button>
+                </div>
+              )}
             </div>
             <p className="text-foreground text-sm leading-relaxed">
               {mockUser.bio}

@@ -1,6 +1,7 @@
 'server-only';
 import { cache } from 'react';
 import type { EventDetails, EventWithGuestCount } from '@/lib/types';
+import type { Session } from '@/migrations/00009-createTableSessions';
 import { sql } from './connect';
 
 // "Read" in CRUD
@@ -18,6 +19,27 @@ export const getAllEventsInsecure = cache(async () => {
       events.starts_at ASC
   `;
 });
+
+export const isEventHost = cache(
+  async (sessionToken: Session['token'], eventId: string) => {
+    const [row] = await sql<{ isHost: boolean }[]>`
+      SELECT
+        EXISTS (
+          SELECT
+            1
+          FROM
+            event_hosts
+            INNER JOIN sessions ON event_hosts.user_id = sessions.user_id
+          WHERE
+            event_hosts.event_id = ${eventId}::uuid
+            AND sessions.token = ${sessionToken}
+            AND sessions.expiry_timestamp > now()
+        ) AS is_host
+    `;
+
+    return Boolean(row?.isHost);
+  },
+);
 
 export const getEventByIdInsecure = cache(async (id: string) => {
   const [event] = await sql<EventDetails[]>`
