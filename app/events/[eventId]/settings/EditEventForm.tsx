@@ -1,0 +1,94 @@
+'use client';
+
+import { useActionState, useState, useTransition } from 'react';
+import EventForm from '@/app/components/EventForm';
+import { Button } from '@/app/components/ui/button';
+import Link from 'next/link';
+import { LuArrowRight } from 'react-icons/lu';
+import { deleteEventAction, updateEventAction } from '../../actions';
+
+type Props = {
+  eventId: string;
+  defaultValues: {
+    name: string;
+    date: string;
+    time: string;
+    location: string;
+    category: string;
+    description: string;
+    maxGuests: number;
+  };
+};
+
+export function EditEventForm({ eventId, defaultValues }: Props) {
+  const updateWithId = updateEventAction.bind(null, eventId);
+  const [state, formAction, pending] = useActionState(updateWithId, {});
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [isDeleting, startDeleteTransition] = useTransition();
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  return (
+    <EventForm
+      action={formAction}
+      defaultValues={defaultValues}
+      errors={state.errors}
+    >
+      <div className="flex gap-3">
+        <Button type="submit" className="group flex-1" disabled={pending}>
+          {pending ? 'Saving...' : 'Save Changes'}
+          <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
+        </Button>
+
+        <Button variant="outline" asChild>
+          <Link href={`/events/${eventId}`}>Cancel</Link>
+        </Button>
+      </div>
+      <div className="space-y-4">
+        <h2 className="font-display text-lg font-semibold text-destructive">
+          Danger zone
+        </h2>
+        <div className="flex items-center justify-between p-4 rounded-xl border border-destructive/30 bg-destructive/5">
+          <div>
+            <p className="text-sm font-medium text-foreground">
+              Delete your event
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Permanently delete your event. This action is not reversible!
+            </p>
+            {deleteError && (
+              <p className="text-xs text-destructive mt-1" role="alert">
+                {deleteError}
+              </p>
+            )}
+          </div>
+          <Button
+            variant="destructive"
+            size="sm"
+            type="button"
+            disabled={isDeleting}
+            onClick={() => {
+              if (!confirmDelete) {
+                setConfirmDelete(true);
+                return;
+              }
+              setDeleteError(null);
+              startDeleteTransition(async () => {
+                const result = await deleteEventAction(eventId);
+                if (result.errors?.general) {
+                  setDeleteError(result.errors.general);
+                }
+              });
+            }}
+            onBlur={() => setConfirmDelete(false)}
+          >
+            {isDeleting
+              ? 'Deleting...'
+              : confirmDelete
+                ? 'Are you sure?'
+                : 'Delete event'}
+          </Button>
+        </div>
+      </div>
+    </EventForm>
+  );
+}

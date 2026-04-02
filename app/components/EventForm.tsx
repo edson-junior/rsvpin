@@ -1,16 +1,48 @@
-import { LuCalendar, LuClock, LuMapPin, LuType, LuTag } from 'react-icons/lu';
+import {
+  LuCalendar,
+  LuClock,
+  LuMapPin,
+  LuType,
+  LuTag,
+  LuUsers,
+} from 'react-icons/lu';
 import { iconClass, inputClass, labelClass } from './ui/input';
 import { cn } from '@/lib/utils';
 
 type Props = {
   children?: React.ReactNode;
+  action?: (formData: FormData) => void;
+  defaultValues?: {
+    name?: string;
+    date?: string;
+    time?: string;
+    location?: string;
+    category?: string;
+    description?: string;
+    maxGuests?: number;
+  };
+  errors?: {
+    name?: string;
+    date?: string;
+    time?: string;
+    location?: string;
+    category?: string;
+    description?: string;
+    maxGuests?: string;
+    general?: string;
+  };
 };
 
 const eventFormLabelClass = cn(labelClass, 'flex items-center gap-2 mb-0');
+const errorClass = 'text-red-500 text-xs mt-1';
 
-function EventForm({ children }: Props) {
+function EventForm({ children, action, defaultValues, errors }: Props) {
   return (
-    <form className="space-y-5">
+    <form action={action} className="space-y-5">
+      {errors?.general && (
+        <p className="text-red-500 text-sm">{errors.general}</p>
+      )}
+
       <div>
         <label htmlFor="name" className={eventFormLabelClass}>
           <LuType className={iconClass} />
@@ -18,11 +50,14 @@ function EventForm({ children }: Props) {
         </label>
         <input
           id="name"
+          name="name"
           placeholder="e.g. Design Systems Workshop"
+          defaultValue={defaultValues?.name}
           className={inputClass}
           maxLength={100}
           required
         />
+        {errors?.name && <span className={errorClass}>{errors.name}</span>}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -31,14 +66,30 @@ function EventForm({ children }: Props) {
             <LuCalendar className={iconClass} />
             Date <span className="text-red-600 text-lg font-bold">*</span>
           </label>
-          <input id="date" type="date" className={inputClass} required />
+          <input
+            id="date"
+            name="date"
+            type="date"
+            defaultValue={defaultValues?.date}
+            className={inputClass}
+            required
+          />
+          {errors?.date && <span className={errorClass}>{errors.date}</span>}
         </div>
         <div>
           <label htmlFor="time" className={eventFormLabelClass}>
             <LuClock className={iconClass} />
             Time <span className="text-red-600 text-lg font-bold">*</span>
           </label>
-          <input id="time" type="time" className={inputClass} required />
+          <input
+            id="time"
+            name="time"
+            type="time"
+            defaultValue={defaultValues?.time}
+            className={inputClass}
+            required
+          />
+          {errors?.time && <span className={errorClass}>{errors.time}</span>}
         </div>
       </div>
 
@@ -49,11 +100,16 @@ function EventForm({ children }: Props) {
         </label>
         <input
           id="location"
+          name="location"
           placeholder="e.g. San Francisco, CA"
+          defaultValue={defaultValues?.location}
           className={inputClass}
           maxLength={200}
           required
         />
+        {errors?.location && (
+          <span className={errorClass}>{errors.location}</span>
+        )}
       </div>
 
       <div>
@@ -63,11 +119,37 @@ function EventForm({ children }: Props) {
         </label>
         <input
           id="category"
+          name="category"
           placeholder="e.g. Tech"
+          defaultValue={defaultValues?.category}
           className={inputClass}
           maxLength={200}
           required
         />
+        {errors?.category && (
+          <span className={errorClass}>{errors.category}</span>
+        )}
+      </div>
+
+      <div>
+        <label htmlFor="maxGuests" className={eventFormLabelClass}>
+          <LuUsers className={iconClass} />
+          Max Guests <span className="text-red-600 text-lg font-bold">*</span>
+        </label>
+        <input
+          id="maxGuests"
+          name="maxGuests"
+          type="number"
+          min={1}
+          max={500}
+          placeholder="e.g. 50"
+          defaultValue={defaultValues?.maxGuests}
+          className={inputClass}
+          required
+        />
+        {errors?.maxGuests && (
+          <span className={errorClass}>{errors.maxGuests}</span>
+        )}
       </div>
 
       <div>
@@ -77,12 +159,17 @@ function EventForm({ children }: Props) {
         </label>
         <textarea
           id="description"
+          name="description"
           placeholder="Tell people what your event is about..."
+          defaultValue={defaultValues?.description}
           rows={5}
           className={`${inputClass} resize-none`}
           maxLength={2000}
           required
         />
+        {errors?.description && (
+          <span className={errorClass}>{errors.description}</span>
+        )}
       </div>
       {children}
     </form>

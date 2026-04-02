@@ -1,5 +1,9 @@
 import { Button } from '@/app/components/ui/button';
-import { getEventByIdInsecure, isEventHost } from '@/database/events';
+import {
+  getEventByIdInsecure,
+  isEventGuest,
+  isEventHost,
+} from '@/database/events';
 import { getSessionToken } from '@/lib/auth';
 import { formatDate, formatTime } from '@/lib/utils';
 import Image from 'next/image';
@@ -13,14 +17,17 @@ import {
   LuShare2,
   LuUsers,
 } from 'react-icons/lu';
+import { EventRegistration } from './EventRegistration';
 
 export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
   const { eventId: id } = await props.params;
   const event = await getEventByIdInsecure(id);
-  const registered = false;
 
   const sessionToken = await getSessionToken();
   const isHost = sessionToken ? await isEventHost(sessionToken, id) : false;
+  const registered = sessionToken
+    ? await isEventGuest(sessionToken, id)
+    : false;
 
   if (!event) {
     return notFound();
@@ -152,16 +159,17 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
               </div>
             </div>
 
-            {registered ? (
-              <div className="text-center">
-                <div className="py-3 px-4 rounded-xl bg-primary/10 text-primary text-sm font-medium mb-3">
-                  ✓ You're registered!
+            {!isHost &&
+              (registered ? (
+                <div className="text-center">
+                  <div className="py-3 px-4 rounded-xl bg-primary/10 text-primary text-sm font-medium mb-3">
+                    ✓ You're registered!
+                  </div>
+                  <EventRegistration eventId={id} registered={registered} />
                 </div>
-                <Button variant="destructive">Cancel registration</Button>
-              </div>
-            ) : (
-              <Button className="w-full">Register</Button>
-            )}
+              ) : (
+                <EventRegistration eventId={id} registered={registered} />
+              ))}
 
             {isHost && (
               <Button variant="destructive" asChild>
