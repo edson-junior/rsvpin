@@ -1,14 +1,32 @@
 import EventForm from '@/app/components/EventForm';
 import { Button } from '@/app/components/ui/button';
+import { isEventHost } from '@/database/events';
+import { getSessionToken } from '@/lib/auth';
 import { mockEvents } from '@/mocks/mockData';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { LuArrowRight } from 'react-icons/lu';
 
 export default async function EditEventPage(
   props: PageProps<'/events/[eventId]/settings'>,
 ) {
   const { eventId: id } = await props.params;
+
+  // 1. Get session token from cookie
+  const sessionToken = await getSessionToken();
+
+  // 2. If no valid session, redirect to login page
+  if (!sessionToken) {
+    redirect(`/signin?returnTo=/events/${id}/settings`);
+  }
+
+  // 3. Check if the user is a host of this event
+  const isHost = await isEventHost(sessionToken, id);
+
+  if (!isHost) {
+    return notFound();
+  }
+
   const event = mockEvents.find((e) => e.id === id);
 
   if (!event) {

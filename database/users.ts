@@ -80,11 +80,16 @@ export const createUserInsecure = async (
 
 export const getUserBySessionToken = cache(
   async (sessionToken: Session['token']) => {
-    const [user] = await sql<Pick<User, 'id' | 'name' | 'username'>[]>`
+    const [user] = await sql<
+      Pick<User, 'id' | 'name' | 'username' | 'bio' | 'location' | 'website'>[]
+    >`
       SELECT
         users.id,
         users.name,
-        users.username
+        users.username,
+        users.bio,
+        users.location,
+        users.website
       FROM
         users
         INNER JOIN sessions ON users.id = sessions.user_id

@@ -1,7 +1,6 @@
 import { Button } from '@/app/components/ui/button';
-import { getValidSession } from '@/database/sessions';
+import { getUserBySessionToken } from '@/database/users';
 import { getSessionToken } from '@/lib/auth';
-import { mockUsers } from '@/mocks/mockData';
 import { notFound, redirect } from 'next/navigation';
 
 export default async function Settings(
@@ -13,17 +12,18 @@ export default async function Settings(
   // 1. Get session token from cookie
   const sessionToken = await getSessionToken();
 
-  // 2. Check if session token is valid
-  const session = !!sessionToken && (await getValidSession(sessionToken));
+  // 2. Check if session token is valid and get user
+  const user = sessionToken
+    ? await getUserBySessionToken(sessionToken)
+    : undefined;
 
-  // 3. If sessionToken is invalid, redirect to login page
-  if (!session) {
+  // 3. If no valid session, redirect to login page
+  if (!user) {
     redirect(`/signin?returnTo=/user/${usernameParam}/settings`);
   }
 
-  const user = mockUsers[0];
-
-  if (!user) {
+  // 4. If the logged-in user doesn't own this profile, block access
+  if (user.username !== usernameParam) {
     return notFound();
   }
 
