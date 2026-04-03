@@ -61,6 +61,7 @@ export default async function EditEventPage(
           category: event.category,
           description: event.description,
           maxGuests: event.maxGuests,
+          image: event.image,
         }}
       />
     </main>

@@ -25,6 +25,7 @@ type Props = {
     category: string;
     description: string;
     maxGuests: number;
+    image: string | null;
   };
 };
 

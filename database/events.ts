@@ -124,6 +124,7 @@ export const createEvent = async (
   sessionToken: Session['token'],
   name: Event['name'],
   description: Event['description'],
+  image: Event['image'],
   location: Event['location'],
   category: Event['category'],
   startsAt: Event['startsAt'],
@@ -137,6 +138,7 @@ export const createEvent = async (
           events (
             name,
             description,
+            image,
             location,
             category,
             location_type,
@@ -148,6 +150,7 @@ export const createEvent = async (
         SELECT
           ${name},
           ${description},
+          ${image},
           ${location},
           ${category},
           'offline',
@@ -183,6 +186,7 @@ export const updateEvent = async (
   eventId: string,
   name: Event['name'],
   description: Event['description'],
+  image: Event['image'],
   location: Event['location'],
   category: Event['category'],
   startsAt: Event['startsAt'],
@@ -194,6 +198,7 @@ export const updateEvent = async (
     SET
       name = ${name},
       description = ${description},
+      image = ${image},
       location = ${location},
       category = ${category},
       starts_at = ${startsAt},

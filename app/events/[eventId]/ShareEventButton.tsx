@@ -6,9 +6,14 @@ import { toast } from 'sonner';
 
 export function ShareEventButton({ eventId }: { eventId: string }) {
   async function handleCopyToClipboard() {
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/events/${eventId}`;
-    await navigator.clipboard.writeText(url);
-    toast.success('Event link copied to clipboard!');
+    const base = process.env.NEXT_PUBLIC_BASE_URL || window.location.origin;
+    const url = `${base}/events/${eventId}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      toast.success('Event link copied to clipboard!');
+    } catch {
+      toast.error('Failed to copy link to clipboard');
+    }
   }
 
   return (

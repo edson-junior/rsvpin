@@ -47,6 +47,12 @@ const eventSchema = z.object({
     .int()
     .positive('Max guests must be a positive number.')
     .max(500, 'Max guests must be at most 500.'),
+  image: z
+    .url('Invalid image URL.')
+    .trim()
+    .nullable()
+    .optional()
+    .transform((val) => val || null),
 });
 
 export type EventFormState = {
@@ -58,6 +64,7 @@ export type EventFormState = {
     date?: string;
     time?: string;
     maxGuests?: string;
+    image?: string;
     general?: string;
   };
 };
@@ -80,6 +87,7 @@ export async function createEventAction(
     date: formData.get('date'),
     time: formData.get('time'),
     maxGuests: formData.get('maxGuests'),
+    image: formData.get('image') || null,
   });
 
   if (!result.success) {
@@ -93,12 +101,21 @@ export async function createEventAction(
         date: fieldErrors.date?.[0],
         time: fieldErrors.time?.[0],
         maxGuests: fieldErrors.maxGuests?.[0],
+        image: fieldErrors.image?.[0],
       },
     };
   }
 
-  const { name, description, location, category, date, time, maxGuests } =
-    result.data;
+  const {
+    name,
+    description,
+    location,
+    category,
+    date,
+    time,
+    maxGuests,
+    image,
+  } = result.data;
 
   const startsAt = new Date(`${date}T${time}`);
 
@@ -112,6 +129,7 @@ export async function createEventAction(
     sessionToken,
     name,
     description,
+    image,
     location,
     category,
     startsAt,
@@ -147,6 +165,7 @@ export async function updateEventAction(
     date: formData.get('date'),
     time: formData.get('time'),
     maxGuests: formData.get('maxGuests'),
+    image: formData.get('image') || null,
   });
 
   if (!result.success) {
@@ -160,12 +179,21 @@ export async function updateEventAction(
         date: fieldErrors.date?.[0],
         time: fieldErrors.time?.[0],
         maxGuests: fieldErrors.maxGuests?.[0],
+        image: fieldErrors.image?.[0],
       },
     };
   }
 
-  const { name, description, location, category, date, time, maxGuests } =
-    result.data;
+  const {
+    name,
+    description,
+    location,
+    category,
+    date,
+    time,
+    maxGuests,
+    image,
+  } = result.data;
 
   const startsAt = new Date(`${date}T${time}`);
 
@@ -180,6 +208,7 @@ export async function updateEventAction(
     eventId,
     name,
     description,
+    image,
     location,
     category,
     startsAt,
