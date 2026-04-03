@@ -159,7 +159,16 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
               </div>
             </div>
 
+            {!isHost && !sessionToken && (
+              <Button asChild className="w-full">
+                <Link href={`/signin?returnTo=/events/${id}`}>
+                  Sign in to register
+                </Link>
+              </Button>
+            )}
+
             {!isHost &&
+              sessionToken &&
               (registered ? (
                 <div className="text-center">
                   <div className="py-3 px-4 rounded-xl bg-primary/10 text-primary text-sm font-medium mb-3">

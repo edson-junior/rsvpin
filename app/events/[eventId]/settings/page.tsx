@@ -32,8 +32,11 @@ export default async function EditEventPage(
   }
 
   const startsAt = new Date(event.startsAt);
-  const date = startsAt.toISOString().slice(0, 10);
-  const time = startsAt.toISOString().slice(11, 16);
+  const date = startsAt.toLocaleDateString(process.env.LOCALE);
+  const time = startsAt.toLocaleTimeString(process.env.LOCALE, {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 
   return (
     <main className="container mx-auto px-4 pt-32 md:pt-40 pb-20 max-w-2xl">

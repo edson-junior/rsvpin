@@ -34,13 +34,13 @@ type Props = {
 };
 
 const eventFormLabelClass = cn(labelClass, 'flex items-center gap-2 mb-0');
-const errorClass = 'text-red-500 text-xs mt-1';
+const errorClass = 'text-destructive text-xs mt-1';
 
 function EventForm({ children, action, defaultValues, errors }: Props) {
   return (
     <form action={action} className="space-y-5">
       {errors?.general && (
-        <p className="text-red-500 text-sm">{errors.general}</p>
+        <p className="text-destructive text-sm">{errors.general}</p>
       )}
 
       <div>
