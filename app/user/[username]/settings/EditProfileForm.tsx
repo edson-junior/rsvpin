@@ -2,6 +2,14 @@
 
 import { useActionState, useState, useTransition } from 'react';
 import { Button } from '@/app/components/ui/button';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from '@/app/components/ui/dialog';
 import Link from 'next/link';
 import { deleteAccountAction, updateProfileAction } from '../../actions';
 
@@ -18,9 +26,9 @@ type Props = {
 
 export function EditProfileForm({ username, defaultValues }: Props) {
   const [state, formAction, pending] = useActionState(updateProfileAction, {});
-  const [confirmDelete, setConfirmDelete] = useState(false);
   const [isDeleting, startDeleteTransition] = useTransition();
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const inputClass =
     'w-full px-4 py-3 rounded-xl bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow';
@@ -146,32 +154,45 @@ export function EditProfileForm({ username, defaultValues }: Props) {
               </p>
             )}
           </div>
-          <Button
-            variant="destructive"
-            size="sm"
-            type="button"
-            disabled={isDeleting}
-            onClick={() => {
-              if (!confirmDelete) {
-                setConfirmDelete(true);
-                return;
-              }
-              setDeleteError(null);
-              startDeleteTransition(async () => {
-                const result = await deleteAccountAction();
-                if (result.errors?.general) {
-                  setDeleteError(result.errors.general);
-                }
-              });
-            }}
-            onBlur={() => setConfirmDelete(false)}
-          >
-            {isDeleting
-              ? 'Deleting...'
-              : confirmDelete
-                ? 'Are you sure?'
-                : 'Delete'}
-          </Button>
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button variant="destructive" size="sm" type="button">
+                Delete
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogTitle>Delete account</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete your account? This action is
+                permanent and cannot be undone.
+              </DialogDescription>
+              <div className="flex justify-end gap-3 mt-6">
+                <DialogClose asChild>
+                  <Button variant="outline" size="sm" type="button">
+                    Cancel
+                  </Button>
+                </DialogClose>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  type="button"
+                  disabled={isDeleting}
+                  onClick={() => {
+                    setDeleteError(null);
+                    startDeleteTransition(async () => {
+                      const result = await deleteAccountAction();
+                      if (result.errors?.general) {
+                        setDeleteError(result.errors.general);
+                        setDialogOpen(false);
+                      }
+                    });
+                  }}
+                >
+                  {isDeleting ? 'Deleting...' : 'Delete account'}
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
