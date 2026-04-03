@@ -15,10 +15,10 @@ import {
   LuClock,
   LuMapPin,
   LuPencil,
-  LuShare2,
   LuUsers,
 } from 'react-icons/lu';
 import { EventRegistration } from './EventRegistration';
+import { ShareEventButton } from './ShareEventButton';
 
 export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
   const { eventId: id } = await props.params;
@@ -176,10 +176,7 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
                 <EventRegistration eventId={id} registered={registered} />
               ))}
 
-            <Button variant="outline" className="w-full mt-3">
-              <LuShare2 className="w-3.5 h-3.5" />
-              Share event
-            </Button>
+            <ShareEventButton eventId={id} />
 
             {isHost && (
               <Button variant="outline" asChild>
