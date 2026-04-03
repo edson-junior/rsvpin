@@ -18,18 +18,24 @@ export function EventCard({
 
   return (
     <Link href={`/events/${id}`} className="group">
-      <div className="w-full aspect-video relative mb-4 overflow-hidden rounded-md">
-        {image && (
-          <Image
-            fill
-            priority
-            fetchPriority="high"
-            sizes="(min-width: 1340px) 832px, (min-width: 1040px) calc(85.71vw - 299px), 50vw"
-            src={image}
-            alt={name}
-            className="object-cover transition duration-200 ease-in-out transform group-hover:scale-110"
-          />
-        )}
+      <div className="w-full aspect-video relative mb-4 overflow-hidden rounded-md bg-secondary">
+        <div className="w-full h-full bg-linear-to-br from-primary/20 to-primary/5 flex items-center justify-center relative">
+          {image ? (
+            <Image
+              fill
+              priority
+              fetchPriority="high"
+              sizes="(min-width: 1340px) 832px, (min-width: 1040px) calc(85.71vw - 299px), 50vw"
+              src={image}
+              alt={name}
+              className="object-cover transition duration-200 ease-in-out transform group-hover:scale-110"
+            />
+          ) : (
+            <span className="text-6xl font-display font-bold text-foreground/5">
+              {name.charAt(0)}
+            </span>
+          )}
+        </div>
         <span className="absolute top-3 left-3 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs">
           {category}
         </span>
