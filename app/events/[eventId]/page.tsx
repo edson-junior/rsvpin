@@ -14,6 +14,7 @@ import {
   LuCalendar,
   LuClock,
   LuMapPin,
+  LuPencil,
   LuShare2,
   LuUsers,
 } from 'react-icons/lu';
@@ -170,31 +171,27 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
             {!isHost &&
               sessionToken &&
               (registered ? (
-                <div className="text-center">
-                  <div className="py-3 px-4 rounded-xl bg-primary/10 text-primary text-sm font-medium mb-3">
-                    ✓ You're registered!
-                  </div>
-                  <EventRegistration eventId={id} registered={registered} />
-                </div>
+                <EventRegistration eventId={id} registered={registered} />
               ) : (
                 <EventRegistration eventId={id} registered={registered} />
               ))}
-
-            {isHost && (
-              <Button variant="destructive" asChild>
-                <Link
-                  href={`/events/${event.id}/settings`}
-                  className="w-full mt-2"
-                >
-                  Edit event
-                </Link>
-              </Button>
-            )}
 
             <Button variant="outline" className="w-full mt-3">
               <LuShare2 className="w-3.5 h-3.5" />
               Share event
             </Button>
+
+            {isHost && (
+              <Button variant="outline" asChild>
+                <Link
+                  href={`/events/${event.id}/settings`}
+                  className="w-full mt-2"
+                >
+                  <LuPencil className="w-3.5 h-3.5" />
+                  Edit event
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>

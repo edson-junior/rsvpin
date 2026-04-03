@@ -1,4 +1,10 @@
-import { LuCalendar, LuLink, LuMapPin, LuUsers } from 'react-icons/lu';
+import {
+  LuCalendar,
+  LuLink,
+  LuMapPin,
+  LuPencil,
+  LuUsers,
+} from 'react-icons/lu';
 import { Button } from '../../components/ui/button';
 import Link from 'next/link';
 import {
@@ -52,6 +58,7 @@ const Profile = async (props: PageProps<'/user/[username]'>) => {
                 <div className="sm:ml-auto flex gap-2">
                   <Button variant="outline" size="sm" asChild>
                     <Link href={`/user/${usernameParam}/settings`}>
+                      <LuPencil className="w-3.5 h-3.5" />
                       Edit profile
                     </Link>
                   </Button>
