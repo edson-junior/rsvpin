@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@neondatabase/serverless':
+        specifier: ^1.0.2
+        version: 1.0.2
       '@radix-ui/react-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -37,7 +40,7 @@ importers:
         version: 9.1.0(dotenv@17.3.1)
       next:
         specifier: 16.1.6
-        version: 16.1.6(@babel/core@7.29.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 16.1.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       postgres:
         specifier: ^3.4.8
         version: 3.4.8
@@ -66,6 +69,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^20.4.2
         version: 20.4.2
+      '@playwright/test':
+        specifier: ^1.58.2
+        version: 1.58.2
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.2.1
@@ -808,6 +814,10 @@ packages:
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
 
+  '@neondatabase/serverless@1.0.2':
+    resolution: {integrity: sha512-I5sbpSIAHiB+b6UttofhrN/UJXII+4tZPAq1qugzwCwLIL8EZLV7F/JyHUrEIiGgQpEXzpnjlJ+zwcEhheGvCw==}
+    engines: {node: '>=19.0.0'}
+
   '@next/env@16.1.6':
     resolution: {integrity: sha512-N1ySLuZjnAtN3kFnwhAwPvZah8RJxKasD7x1f8shFqhncnWZn4JMfg37diLNuoHsLAlrDfM3g4mawVdtAG8XLQ==}
 
@@ -896,6 +906,11 @@ packages:
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
+  '@playwright/test@1.58.2':
+    resolution: {integrity: sha512-akea+6bHYBBfA9uQqSYmlJXn61cTa+jbO87xVLCWbTqbWadRVmhxlXATaOjOgcBaWU4ePo0wB41KMFv3o35IXA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -1410,8 +1425,14 @@ packages:
   '@types/node@20.19.35':
     resolution: {integrity: sha512-Uarfe6J91b9HAUXxjvSOdiO2UPOKLm07Q1oh0JHxoZ1y8HoqxDAu3gVrsrOHeiio0kSsoVBt4wFrKOm0dKxVPQ==}
 
+  '@types/node@22.19.15':
+    resolution: {integrity: sha512-F0R/h2+dsy5wJAUe3tAU6oqa2qbWY5TpNfL/RGmo1y38hiyO1w3x2jPtt76wmuaJI4DQnOBu21cNXQ2STIUUWg==}
+
   '@types/pegjs@0.10.6':
     resolution: {integrity: sha512-eLYXDbZWXh2uxf+w8sXS8d6KSoXTswfps6fvCUuVAGN8eRpfe7h9eSRydxiSJvo9Bf+GzifsDOr9TMQlmJdmkw==}
+
+  '@types/pg@8.20.0':
+    resolution: {integrity: sha512-bEPFOaMAHTEP1EzpvHTbmwR8UsFyHSKsRisLIHVMXnpNefSbGA1bD6CVy+qKjGSqmZqNqBDV2azOBo8TgkcVow==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -2372,6 +2393,11 @@ packages:
   fp-ts@2.16.11:
     resolution: {integrity: sha512-LaI+KaX2NFkfn1ZGHoKCmcfv7yrZsC3b8NtWsTVQeHkq4F27vI5igUuO53sxqDEa2gNQMHFPmpojDw/1zmUK7w==}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -3144,6 +3170,17 @@ packages:
   pg-connection-string@2.7.0:
     resolution: {integrity: sha512-PI2W9mv53rXJQEOb8xNR8lH7Hr+EKa6oJa38zsK0S/ky2er16ios1wLKhZyxzD7jUReiWokc9WK5nxSnC7W1TA==}
 
+  pg-int8@1.0.1:
+    resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
+    engines: {node: '>=4.0.0'}
+
+  pg-protocol@1.13.0:
+    resolution: {integrity: sha512-zzdvXfS6v89r6v7OcFCHfHlyG/wvry1ALxZo4LqgUoy7W9xhBDMaqOuMiF3qEV45VqsN6rdlcehHrfDtlCPc8w==}
+
+  pg-types@2.2.0:
+    resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
+    engines: {node: '>=4'}
+
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -3154,6 +3191,16 @@ packages:
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
+
+  playwright-core@1.58.2:
+    resolution: {integrity: sha512-yZkEtftgwS8CsfYo7nm0KE8jsvm6i/PTgVtB8DL726wNf6H2IMsDuxCpJj59KDaxCtSnrWan2AeDqM7JBaultg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.58.2:
+    resolution: {integrity: sha512-vA30H8Nvkq/cPBnNw4Q8TWz1EJyqgpuinBcHET0YVJVFldr8JDNiU9LaWAE1KqSkRYazuaBhTpB5ZzShOezQ6A==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
@@ -3201,6 +3248,22 @@ packages:
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
+
+  postgres-array@2.0.0:
+    resolution: {integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==}
+    engines: {node: '>=4'}
+
+  postgres-bytea@1.0.1:
+    resolution: {integrity: sha512-5+5HqXnsZPE65IJZSMkZtURARZelel2oXUEO8rH83VS/hxH5vv1uHquPg5wZs8yMAfdv971IU+kcPUczi7NVBQ==}
+    engines: {node: '>=0.10.0'}
+
+  postgres-date@1.0.7:
+    resolution: {integrity: sha512-suDmjLVQg78nMK2UZ454hAG+OAW+HQPZ6n++TNDUX+L0+uUlLywnoxJKDou51Zm+zTCjrCl0Nq6J9C5hP9vK/Q==}
+    engines: {node: '>=0.10.0'}
+
+  postgres-interval@1.2.0:
+    resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
+    engines: {node: '>=0.10.0'}
 
   postgres@3.4.8:
     resolution: {integrity: sha512-d+JFcLM17njZaOLkv6SCev7uoLaBtfK86vMUXhW1Z4glPWh4jozno9APvW/XKFJ3CCxVoC7OL38BqRydtu5nGg==}
@@ -3926,6 +3989,10 @@ packages:
     resolution: {integrity: sha512-OTIk8iR8/aCRWBqvxrzxR0hgxWpnYBblY1S5hDWBQfk/VFmJwzmJgQFN3WsoUKHISv2eAwe+PpbUzyL1CKTLXg==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
+  xtend@4.0.2:
+    resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
+    engines: {node: '>=0.4'}
+
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
     engines: {node: '>=10'}
@@ -4605,6 +4672,11 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
+  '@neondatabase/serverless@1.0.2':
+    dependencies:
+      '@types/node': 22.19.15
+      '@types/pg': 8.20.0
+
   '@next/env@16.1.6': {}
 
   '@next/eslint-plugin-next@16.1.6':
@@ -4663,6 +4735,10 @@ snapshots:
   '@pgsql/types@17.6.2': {}
 
   '@pkgr/core@0.2.9': {}
+
+  '@playwright/test@1.58.2':
+    dependencies:
+      playwright: 1.58.2
 
   '@polka/url@1.0.0-next.29':
     optional: true
@@ -5075,7 +5151,17 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/node@22.19.15':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/pegjs@0.10.6': {}
+
+  '@types/pg@8.20.0':
+    dependencies:
+      '@types/node': 20.19.35
+      pg-protocol: 1.13.0
+      pg-types: 2.2.0
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
@@ -6201,6 +6287,9 @@ snapshots:
 
   fp-ts@2.16.11: {}
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -6786,7 +6875,7 @@ snapshots:
       railroad-diagrams: 1.0.0
       randexp: 0.4.6
 
-  next@16.1.6(@babel/core@7.29.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  next@16.1.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       '@next/env': 16.1.6
       '@swc/helpers': 0.5.15
@@ -6805,6 +6894,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 16.1.6
       '@next/swc-win32-arm64-msvc': 16.1.6
       '@next/swc-win32-x64-msvc': 16.1.6
+      '@playwright/test': 1.58.2
       sharp: 0.34.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -6906,11 +6996,31 @@ snapshots:
 
   pg-connection-string@2.7.0: {}
 
+  pg-int8@1.0.1: {}
+
+  pg-protocol@1.13.0: {}
+
+  pg-types@2.2.0:
+    dependencies:
+      pg-int8: 1.0.1
+      postgres-array: 2.0.0
+      postgres-bytea: 1.0.1
+      postgres-date: 1.0.7
+      postgres-interval: 1.2.0
+
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
 
   picomatch@4.0.3: {}
+
+  playwright-core@1.58.2: {}
+
+  playwright@1.58.2:
+    dependencies:
+      playwright-core: 1.58.2
+    optionalDependencies:
+      fsevents: 2.3.2
 
   pluralize@8.0.0: {}
 
@@ -6951,6 +7061,16 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  postgres-array@2.0.0: {}
+
+  postgres-bytea@1.0.1: {}
+
+  postgres-date@1.0.7: {}
+
+  postgres-interval@1.2.0:
+    dependencies:
+      xtend: 4.0.2
 
   postgres@3.4.8: {}
 
@@ -7817,6 +7937,8 @@ snapshots:
   write-file-atomic@7.0.1:
     dependencies:
       signal-exit: 4.1.0
+
+  xtend@4.0.2: {}
 
   y18n@5.0.8: {}
 
