@@ -14,10 +14,11 @@ import {
   LuCalendar,
   LuClock,
   LuMapPin,
-  LuShare2,
+  LuPencil,
   LuUsers,
 } from 'react-icons/lu';
 import { EventRegistration } from './EventRegistration';
+import { ShareEventButton } from './ShareEventButton';
 
 export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
   const { eventId: id } = await props.params;
@@ -159,33 +160,35 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
               </div>
             </div>
 
-            {!isHost &&
-              (registered ? (
-                <div className="text-center">
-                  <div className="py-3 px-4 rounded-xl bg-primary/10 text-primary text-sm font-medium mb-3">
-                    ✓ You're registered!
-                  </div>
-                  <EventRegistration eventId={id} registered={registered} />
-                </div>
-              ) : (
-                <EventRegistration eventId={id} registered={registered} />
-              ))}
-
-            {isHost && (
-              <Button variant="destructive" asChild>
-                <Link
-                  href={`/events/${event.id}/settings`}
-                  className="w-full mt-2"
-                >
-                  Edit event
+            {!isHost && !sessionToken && (
+              <Button asChild className="w-full">
+                <Link href={`/signin?returnTo=/events/${id}`}>
+                  Sign in to register
                 </Link>
               </Button>
             )}
 
-            <Button variant="outline" className="w-full mt-3">
-              <LuShare2 className="w-3.5 h-3.5" />
-              Share event
-            </Button>
+            {!isHost &&
+              sessionToken &&
+              (registered ? (
+                <EventRegistration eventId={id} registered={registered} />
+              ) : (
+                <EventRegistration eventId={id} registered={registered} />
+              ))}
+
+            <ShareEventButton eventId={id} />
+
+            {isHost && (
+              <Button variant="outline" asChild>
+                <Link
+                  href={`/events/${event.id}/settings`}
+                  className="w-full mt-2"
+                >
+                  <LuPencil className="w-3.5 h-3.5" />
+                  Edit event
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>

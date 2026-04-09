@@ -32,8 +32,15 @@ export default async function EditEventPage(
   }
 
   const startsAt = new Date(event.startsAt);
-  const date = startsAt.toISOString().slice(0, 10);
-  const time = startsAt.toISOString().slice(11, 16);
+  const date = [
+    startsAt.getFullYear(),
+    `${startsAt.getMonth() + 1}`.padStart(2, '0'),
+    `${startsAt.getDate()}`.padStart(2, '0'),
+  ].join('-');
+  const time = [
+    `${startsAt.getHours()}`.padStart(2, '0'),
+    `${startsAt.getMinutes()}`.padStart(2, '0'),
+  ].join(':');
 
   return (
     <main className="container mx-auto px-4 pt-32 md:pt-40 pb-20 max-w-2xl">

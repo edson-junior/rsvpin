@@ -20,6 +20,27 @@ export const getAllEventsInsecure = cache(async () => {
   `;
 });
 
+export const getEventsHostedByUsernameInsecure = cache(
+  async (username: string) => {
+    return await sql<EventWithGuestCount[]>`
+      SELECT
+        events.*,
+        count(event_guests.user_id)::int AS guest_count
+      FROM
+        events
+        INNER JOIN event_hosts ON events.id = event_hosts.event_id
+        INNER JOIN users ON event_hosts.user_id = users.id
+        LEFT JOIN event_guests ON events.id = event_guests.event_id
+      WHERE
+        users.username = ${username.toLowerCase()}
+      GROUP BY
+        events.id
+      ORDER BY
+        events.starts_at ASC
+    `;
+  },
+);
+
 export const isEventHost = cache(
   async (sessionToken: Session['token'], eventId: string) => {
     const [row] = await sql<{ isHost: boolean }[]>`
@@ -239,6 +260,15 @@ export const registerForEvent = async (
   eventId: string,
 ) => {
   const [guest] = await sql<Pick<Event, 'id'>[]>`
+    WITH
+    LOCK AS (
+      SELECT
+        pg_advisory_xact_lock(
+          hashtext (
+            ${eventId}::text
+          )
+        )
+    )
     INSERT INTO
       event_guests (event_id, user_id, status)
     SELECT
@@ -246,8 +276,9 @@ export const registerForEvent = async (
       sessions.user_id,
       'going'
     FROM
-      sessions
-      INNER JOIN events ON events.id = ${eventId}::uuid
+    LOCK,
+    sessions
+    INNER JOIN events ON events.id = ${eventId}::uuid
     WHERE
       sessions.token = ${sessionToken}
       AND sessions.expiry_timestamp > now()

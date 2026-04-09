@@ -5,6 +5,7 @@ import { getUserBySessionToken } from '@/database/users';
 import { getSessionToken } from '@/lib/auth';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -41,6 +42,7 @@ export default async function RootLayout({
         />
         {children}
         <Footer />
+        <Toaster richColors />
       </body>
     </html>
   );
