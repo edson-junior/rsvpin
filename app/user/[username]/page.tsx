@@ -23,8 +23,7 @@ import { notFound } from 'next/navigation';
 import { getSessionToken } from '@/lib/auth';
 
 const Profile = async (props: PageProps<'/user/[username]'>) => {
-  const { username: usernameParam } = await props.params;
-
+  const usernameParam = (await props.params).username.toLowerCase();
   const sessionTokenPromise = getSessionToken();
 
   const [user, hostedEvents, loggedInUser] = await Promise.all([

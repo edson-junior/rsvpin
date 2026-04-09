@@ -28,12 +28,12 @@ const eventSchema = z.object({
     .string()
     .trim()
     .min(1, 'Location is required.')
-    .max(200, 'Location must be at most 200 characters.'),
+    .max(120, 'Location must be at most 120 characters.'),
   category: z
     .string()
     .trim()
     .min(1, 'Category is required.')
-    .max(200, 'Category must be at most 200 characters.'),
+    .max(120, 'Category must be at most 120 characters.'),
   date: z
     .string()
     .min(1, 'Date is required.')

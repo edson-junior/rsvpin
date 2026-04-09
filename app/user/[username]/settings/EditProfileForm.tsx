@@ -124,7 +124,7 @@ export function EditProfileForm({ username, defaultValues }: Props) {
               defaultValue={defaultValues.website}
               className={inputClass}
               placeholder="https://"
-              maxLength={200}
+              maxLength={120}
             />
             {state.errors?.website && (
               <span className={errorClass}>{state.errors.website}</span>

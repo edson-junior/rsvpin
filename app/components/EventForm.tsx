@@ -115,7 +115,7 @@ function EventForm({ children, action, defaultValues, errors }: Props) {
           placeholder="e.g. San Francisco, CA"
           defaultValue={defaultValues?.location}
           className={inputClass}
-          maxLength={200}
+          maxLength={120}
           required
         />
         {errors?.location && (
@@ -134,7 +134,7 @@ function EventForm({ children, action, defaultValues, errors }: Props) {
           placeholder="e.g. Tech"
           defaultValue={defaultValues?.category}
           className={inputClass}
-          maxLength={200}
+          maxLength={120}
           required
         />
         {errors?.category && (
