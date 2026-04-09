@@ -75,10 +75,10 @@ export async function POST(
 
     return NextResponse.json({ url: result.secure_url });
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    return NextResponse.json(
-      { error: 'Upload failed', details: message },
-      { status: 500 },
-    );
+    if (process.env.NODE_ENV === 'development') {
+      console.error(error);
+    }
+
+    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
 }

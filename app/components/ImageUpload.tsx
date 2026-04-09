@@ -76,6 +76,7 @@ export function ImageUpload({ name, defaultValue }: Props) {
             type="button"
             onClick={handleRemove}
             className="absolute top-2 right-2 p-1.5 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors"
+            aria-label="remove image"
           >
             <LuX className="w-4 h-4" />
           </button>

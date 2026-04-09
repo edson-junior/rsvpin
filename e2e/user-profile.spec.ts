@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { signIn, signOut, signUp } from './utils';
+import { signIn, signUp } from './utils';
 
 test.describe('User Profile', () => {
   const profileUser = {

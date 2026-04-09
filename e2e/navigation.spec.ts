@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { signIn, signUp } from './utils';
+import { signUp } from './utils';
 
 test.describe('Home Page', () => {
   test('displays hero section with heading', async ({ page }) => {
