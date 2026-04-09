@@ -8,6 +8,7 @@ import {
 } from 'react-icons/lu';
 import { iconClass, inputClass, labelClass } from './ui/input';
 import { cn } from '@/lib/utils';
+import { ImageUpload } from './ImageUpload';
 
 type Props = {
   children?: React.ReactNode;
@@ -20,6 +21,7 @@ type Props = {
     category?: string;
     description?: string;
     maxGuests?: number;
+    image?: string | null;
   };
   errors?: {
     name?: string;
@@ -29,6 +31,7 @@ type Props = {
     category?: string;
     description?: string;
     maxGuests?: string;
+    image?: string;
     general?: string;
   };
 };
@@ -42,6 +45,14 @@ function EventForm({ children, action, defaultValues, errors }: Props) {
       {errors?.general && (
         <p className="text-destructive text-sm">{errors.general}</p>
       )}
+
+      <div>
+        <p className={eventFormLabelClass}>Event Image</p>
+        <div className="mt-2">
+          <ImageUpload name="image" defaultValue={defaultValues?.image} />
+        </div>
+        {errors?.image && <span className={errorClass}>{errors.image}</span>}
+      </div>
 
       <div>
         <label htmlFor="name" className={eventFormLabelClass}>
@@ -104,7 +115,7 @@ function EventForm({ children, action, defaultValues, errors }: Props) {
           placeholder="e.g. San Francisco, CA"
           defaultValue={defaultValues?.location}
           className={inputClass}
-          maxLength={200}
+          maxLength={120}
           required
         />
         {errors?.location && (
@@ -123,7 +134,7 @@ function EventForm({ children, action, defaultValues, errors }: Props) {
           placeholder="e.g. Tech"
           defaultValue={defaultValues?.category}
           className={inputClass}
-          maxLength={200}
+          maxLength={120}
           required
         />
         {errors?.category && (

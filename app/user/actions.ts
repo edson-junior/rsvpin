@@ -33,7 +33,7 @@ const profileSchema = z.object({
   website: z
     .string()
     .trim()
-    .max(200, 'Website must be at most 200 characters.')
+    .max(120, 'Website must be at most 120 characters.')
     .transform((val) => val || null)
     .pipe(z.string().url('Invalid website URL.').nullable()),
 });

@@ -23,8 +23,7 @@ import { notFound } from 'next/navigation';
 import { getSessionToken } from '@/lib/auth';
 
 const Profile = async (props: PageProps<'/user/[username]'>) => {
-  const { username: usernameParam } = await props.params;
-
+  const usernameParam = (await props.params).username.toLowerCase();
   const sessionTokenPromise = getSessionToken();
 
   const [user, hostedEvents, loggedInUser] = await Promise.all([
@@ -39,7 +38,7 @@ const Profile = async (props: PageProps<'/user/[username]'>) => {
     return notFound();
   }
 
-  const isOwner = loggedInUser?.username === usernameParam;
+  const isOwner = loggedInUser?.username === user.username;
 
   return (
     <main className="max-w-4xl mx-auto px-4 pt-32 md:pt-40 pb-20 md:h-[80vh]">
