@@ -50,6 +50,28 @@ export const getUserByUsernameInsecure = cache(async (username: string) => {
   return user;
 });
 
+export const getUserProfileByUsernameInsecure = cache(
+  async (username: string) => {
+    const [user] = await sql<
+      Pick<User, 'id' | 'name' | 'username' | 'bio' | 'location' | 'website'>[]
+    >`
+      SELECT
+        users.id,
+        users.name,
+        users.username,
+        users.bio,
+        users.location,
+        users.website
+      FROM
+        users
+      WHERE
+        users.username = ${username.toLowerCase()}
+    `;
+
+    return user;
+  },
+);
+
 export const createUserInsecure = async (
   name: User['name'],
   email: string,
@@ -101,3 +123,66 @@ export const getUserBySessionToken = cache(
     return user;
   },
 );
+
+export const updateUser = async (
+  sessionToken: Session['token'],
+  name: User['name'],
+  username: User['username'],
+  bio: User['bio'],
+  location: User['location'],
+  website: User['website'],
+) => {
+  const normalizedUsername = username.toLowerCase();
+
+  const existingUser = await getUserByUsernameInsecure(normalizedUsername);
+
+  if (existingUser) {
+    const sessionUser = await getUserBySessionToken(sessionToken);
+    if (!sessionUser || sessionUser.id !== existingUser.id) {
+      return undefined;
+    }
+  }
+
+  try {
+    const [user] = await sql<Pick<User, 'id' | 'username'>[]>`
+      UPDATE users
+      SET
+        name = ${name},
+        username = ${normalizedUsername},
+        bio = ${bio},
+        location = ${location},
+        website = ${website},
+        updated_at = now()
+      FROM
+        sessions
+      WHERE
+        users.id = sessions.user_id
+        AND sessions.token = ${sessionToken}
+        AND sessions.expiry_timestamp > now()
+      RETURNING
+        users.id,
+        users.username
+    `;
+
+    return user;
+  } catch (error) {
+    if (error instanceof Error && 'code' in error && error.code === '23505') {
+      return undefined;
+    }
+    throw error;
+  }
+};
+
+export const deleteUser = async (sessionToken: Session['token']) => {
+  const [user] = await sql<Pick<User, 'id'>[]>`
+    DELETE FROM users USING sessions
+    WHERE
+      users.id = sessions.user_id
+      AND sessions.token = ${sessionToken}
+      AND sessions.expiry_timestamp > now()
+    RETURNING
+      users.id
+  `;
+
+  return user;
+};
