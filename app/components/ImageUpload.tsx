@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, type ChangeEvent } from 'react';
 import { LuUpload, LuX } from 'react-icons/lu';
 import Image from 'next/image';
 
@@ -16,7 +16,7 @@ export function ImageUpload({ name, defaultValue }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Upload selected file to /api/upload and store the returned URL
-  async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
 

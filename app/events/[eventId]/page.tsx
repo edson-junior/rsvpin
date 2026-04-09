@@ -168,13 +168,9 @@ export default async function EventPage(props: PageProps<'/events/[eventId]'>) {
               </Button>
             )}
 
-            {!isHost &&
-              sessionToken &&
-              (registered ? (
-                <EventRegistration eventId={id} registered={registered} />
-              ) : (
-                <EventRegistration eventId={id} registered={registered} />
-              ))}
+            {!isHost && sessionToken && (
+              <EventRegistration eventId={id} registered={registered} />
+            )}
 
             <ShareEventButton eventId={id} />
 
