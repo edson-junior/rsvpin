@@ -1,15 +1,8 @@
-import type { EventWithGuestCount } from '@/lib/types';
+import { getAllEventsInsecure } from '@/database/events';
 import { EventCard } from '../components/EventCard';
 
 export default async function Discover() {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/events`);
-
-  if (!data.ok) {
-    console.error(data.statusText);
-    return <p>Error while fetching data</p>;
-  }
-
-  const events: EventWithGuestCount[] = await data.json();
+  const events = await getAllEventsInsecure();
 
   return (
     <main className="container mx-auto px-4 pt-32 md:pt-40 pb-20 max-w-7xl">

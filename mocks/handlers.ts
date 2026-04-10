@@ -2,10 +2,6 @@ import { http, HttpResponse } from 'msw';
 import { mockEvents, mockUsers } from './mockData';
 
 export const handlers = [
-  http.get('*/api/events', () => {
-    return HttpResponse.json(mockEvents);
-  }),
-
   http.get('*/api/users', () => {
     return HttpResponse.json(mockUsers);
   }),
