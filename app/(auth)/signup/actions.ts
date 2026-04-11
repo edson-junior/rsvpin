@@ -9,6 +9,7 @@ import {
   getUserByUsernameInsecure,
 } from '@/database/users';
 import { createSessionCookie } from '@/lib/auth';
+import { verifyTurnstileToken } from '@/lib/turnstile';
 import { getSafeReturnToPath } from '@/lib/validation';
 
 const signUpSchema = z.object({
@@ -48,6 +49,17 @@ export async function signUp(
   prevState: SignUpState,
   formData: FormData,
 ): Promise<SignUpState> {
+  const turnstileToken = formData.get('cf-turnstile-response');
+
+  if (
+    typeof turnstileToken !== 'string' ||
+    !(await verifyTurnstileToken(turnstileToken))
+  ) {
+    return {
+      errors: { general: 'CAPTCHA verification failed. Please try again.' },
+    };
+  }
+
   const result = signUpSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),

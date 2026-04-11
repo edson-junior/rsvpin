@@ -1,9 +1,10 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import { LuArrowRight } from 'react-icons/lu';
 import { Button } from '../../components/ui/button';
 import { inputClass, labelClass } from '../../components/ui/input';
+import TurnstileWidget from '../../components/TurnstileWidget';
 import { signIn } from './actions';
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 export default function SignInForm({ returnTo }: Props) {
   const signInWithReturnTo = signIn.bind(null, returnTo);
   const [state, formAction, pending] = useActionState(signInWithReturnTo, {});
+  const [turnstileVerified, setTurnstileVerified] = useState(false);
 
   return (
     <form action={formAction} className="w-full max-w-sm">
@@ -47,7 +49,11 @@ export default function SignInForm({ returnTo }: Props) {
         <p className="text-red-500 text-sm mb-4">{state.errors.general}</p>
       )}
 
-      <Button className="group w-full" disabled={pending}>
+      <div className="mb-4">
+        <TurnstileWidget onVerify={setTurnstileVerified} />
+      </div>
+
+      <Button className="group w-full" disabled={pending || !turnstileVerified}>
         <span>{pending ? 'Signing in...' : 'Sign in'}</span>
         <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
       </Button>

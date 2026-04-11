@@ -60,6 +60,9 @@ CLOUDINARY_CLOUD_NAME=<your-cloud-name>
 CLOUDINARY_API_KEY=<your-api-key>
 CLOUDINARY_API_SECRET=<your-api-secret>
 
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=<your-turnstile-site-key>
+TURNSTILE_SECRET_KEY=<your-turnstile-secret-key>
+
 LOCALE=en-US
 ```
 
@@ -67,17 +70,19 @@ LOCALE=en-US
 
 ### Local Development (`.env`)
 
-| Variable                | Required | Description                                                                                |
-| ----------------------- | -------- | ------------------------------------------------------------------------------------------ |
-| `PGHOST`                | Yes      | PostgreSQL host address (e.g. `localhost`)                                                 |
-| `PGDATABASE`            | Yes      | PostgreSQL database name                                                                   |
-| `PGUSERNAME`            | Yes      | PostgreSQL username                                                                        |
-| `PGPASSWORD`            | Yes      | PostgreSQL password                                                                        |
-| `NEXT_PUBLIC_BASE_URL`  | Yes      | App base URL (e.g. `http://localhost:3000`). Used for share links. Exposed to the browser. |
-| `CLOUDINARY_CLOUD_NAME` | Yes      | Cloudinary cloud name for image uploads                                                    |
-| `CLOUDINARY_API_KEY`    | Yes      | Cloudinary API key                                                                         |
-| `CLOUDINARY_API_SECRET` | Yes      | Cloudinary API secret                                                                      |
-| `LOCALE`                | No       | Locale for date/time formatting (e.g. `en-US`). Falls back to system default.              |
+| Variable                         | Required | Description                                                                                |
+| -------------------------------- | -------- | ------------------------------------------------------------------------------------------ |
+| `PGHOST`                         | Yes      | PostgreSQL host address (e.g. `localhost`)                                                 |
+| `PGDATABASE`                     | Yes      | PostgreSQL database name                                                                   |
+| `PGUSERNAME`                     | Yes      | PostgreSQL username                                                                        |
+| `PGPASSWORD`                     | Yes      | PostgreSQL password                                                                        |
+| `NEXT_PUBLIC_BASE_URL`           | Yes      | App base URL (e.g. `http://localhost:3000`). Used for share links. Exposed to the browser. |
+| `CLOUDINARY_CLOUD_NAME`          | Yes      | Cloudinary cloud name for image uploads                                                    |
+| `CLOUDINARY_API_KEY`             | Yes      | Cloudinary API key                                                                         |
+| `CLOUDINARY_API_SECRET`          | Yes      | Cloudinary API secret                                                                      |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Yes      | Cloudflare Turnstile site key. Exposed to the browser.                                     |
+| `TURNSTILE_SECRET_KEY`           | Yes      | Cloudflare Turnstile secret key for server-side verification                               |
+| `LOCALE`                         | No       | Locale for date/time formatting (e.g. `en-US`). Falls back to system default.              |
 
 ### Production / Vercel
 
