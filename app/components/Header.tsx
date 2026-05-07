@@ -3,7 +3,15 @@
 import Link from 'next/link';
 import { Logo } from './ui/logo';
 import { useState } from 'react';
-import { LuMenu, LuUser, LuX, LuLogOut } from 'react-icons/lu';
+import {
+  LuMenu,
+  LuUser,
+  LuX,
+  LuLogOut,
+  LuStar,
+  LuSearch,
+  LuPen,
+} from 'react-icons/lu';
 import { Button } from './ui/button';
 import { signOut } from '../(auth)/actions';
 
@@ -21,9 +29,27 @@ function Header({ user }: HeaderProps) {
           <Logo />
         </Link>
 
-        <div className="hidden md:flex items-center gap-4">
-          <Link href="/events">Explore Events</Link>
-          <Link href="/events/create">Create Event</Link>
+        <div className="hidden md:flex items-center gap-6">
+          <Link
+            href="/events"
+            className="flex items-center gap-1.5 hover:underline"
+          >
+            <LuSearch className="w-4 h-4" /> Explore Events
+          </Link>
+          <Link
+            href="/events/create"
+            className="flex items-center gap-1.5 hover:underline"
+          >
+            <LuPen className="w-4 h-4" /> Create Event
+          </Link>
+          <Link
+            href="https://github.com/edson-junior/rsvpin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:underline"
+          >
+            <LuStar className="w-4 h-4" /> Star on GitHub
+          </Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -67,17 +93,26 @@ function Header({ user }: HeaderProps) {
           <nav className="p-4 flex flex-col gap-2">
             <Link
               href="/events"
-              className="px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors"
+              className="px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors flex items-center gap-1.5"
               onClick={() => setMobileOpen(false)}
             >
-              Discover
+              <LuSearch className="w-4 h-4" /> Discover
             </Link>
             <Link
               href="/events/create"
-              className="px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors"
+              className="px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors flex items-center gap-1.5"
               onClick={() => setMobileOpen(false)}
             >
-              Create Event
+              <LuPen className="w-4 h-4" /> Create Event
+            </Link>
+            <Link
+              href="https://github.com/edson-junior/rsvpin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors flex items-center gap-1.5"
+              onClick={() => setMobileOpen(false)}
+            >
+              <LuStar className="w-4 h-4" /> Star on GitHub
             </Link>
 
             {user ? (
